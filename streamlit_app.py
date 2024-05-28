@@ -26,7 +26,7 @@ import string
 ###################################################
 file_paths = [
     "4IT401__AF_II_04_IT_aplikace__2022__cz.pdf",
-    "4IT401__AF_II_04_IT_aplikace__2022__cz.pdf"
+    "4IT401__AF_II_05_02_DAX__2022__cz"
 ]
 
 for file_path in file_paths:
