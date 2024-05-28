@@ -98,7 +98,7 @@ def transform_chunks(chunks):
 
 
 corrected_chunks = transform_chunks(chunks)
-os.environ["OPENAI_API_KEY"] = "sk-proj-dIB5fwQnNhEamFTi0wFBT3BlbkFJvBOgjFZTzz0YVcs7ApjO"
+os.environ["OPENAI_API_KEY"] = "sk-proj-qRPLXSJqWs3NNdcs8zbpT3BlbkFJsjhNWp1liriMnjcjPXmp"
 
 embeddings = OpenAIEmbeddings()
 new_client = chromadb.EphemeralClient()
