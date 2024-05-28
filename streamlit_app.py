@@ -209,7 +209,7 @@ for name in unique_names:
     st.sidebar.write(f"Title: {name}")
 
 st.title("VŠE AI Study Buddy")
-st.image("https://via.placeholder.com/150", width=150, caption="Your Logo")
+st.image("logo_fis.jpg", width=150, caption="Your Logo")
 
 ###load model
 llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1",deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
