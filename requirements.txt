@@ -5,3 +5,4 @@ tika
 langchain
 langchain-community
 langchain_openai
+unstructured[all-docs]
