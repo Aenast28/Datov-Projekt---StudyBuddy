@@ -111,17 +111,35 @@ def similarity_search(query):
     return openai_lc_client.similarity_search(query)
 
 # Function to generate response using similarity search and chat completion
+chat_history=[]
 def generate_response(query):
+    # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
     top_documents = docs[:3]  # Select the top three documents
-    context = "\n\n".join([doc.page_content for doc in top_documents])
 
+    # Create the context from the top documents
+    document_context = "\n\n".join([doc.page_content for doc in top_documents])
+    
+    # Combine the chat history and the new context
+    full_context = (
+        "Facts from documents:\n"
+        + document_context
+        + "\n\nChat history:\n"
+        + "\n".join(chat_history)
+    )
+
+    # Generate the response using the full context
     response = chat_chain.invoke(
         {
-            "context": context, #!!!!!!!!!!!!!do kontextu chceme brat 1)predchozi chat a 2)omezit similarity search podle filtru selectnutych
+            "context": full_context,
             "question": query,
         }
     )
+    
+    # Store the query and response in chat history
+    chat_history.append(f"User: {query}")
+    chat_history.append(f"Assistant: {response['text']}")
+    
     return response["text"]
 # Extract unique metadata values for filters
 idents = list(set(doc.metadata['Ident'] for doc in corrected_chunks if doc.metadata['Ident']))
@@ -181,10 +199,14 @@ selected_languages = st.sidebar.multiselect("Filter by Language", languages)
 # Filter documents based on selections
 filtered_documents = filter_documents(selected_idents, selected_names, selected_years, selected_languages)
 
-#!!!!!!!!!!!!!!!!!!!!!!!tohle je potreba upravit, ten to bere metadata z kazdeho chunku protoze doc = chunk, mozna bude stacit dat unique
 st.sidebar.title("Documents")
-for doc in filtered_documents:
-    st.sidebar.write(f"Title: {doc.metadata['Name']}")
+
+# Use a set comprehension to get unique names directly from the documents
+unique_names = {doc.metadata['Name'] for doc in filtered_documents}
+
+# Iterate over the unique names and write them to the sidebar
+for name in unique_names:
+    st.sidebar.write(f"Title: {name}")
 
 st.title("VŠE AI Study Buddy")
 st.image("https://via.placeholder.com/150", width=150, caption="Your Logo")
@@ -226,6 +248,15 @@ if "messages" not in st.session_state:
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
+
+# download document button
+with open(file_path, "rb") as pdf_file:
+    PDFbyte = pdf_file.read()
+
+st.download_button(label="Download last cited document",
+                    data=PDFbyte,
+                    file_name="name.pdf",
+                    mime='application/octet-stream')
 
 # Accept user input
 if prompt := st.chat_input("Jak mohu pomoci?"):
