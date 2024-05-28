@@ -1,3 +1,4 @@
+!pip install openai
 import streamlit as st
 from typing import List, Dict
 from openai import OpenAI
