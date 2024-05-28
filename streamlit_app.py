@@ -24,7 +24,7 @@ import string
 
 #### LOAD DOC ########################################
 ###################################################
-file_path = "C:\\Users\\scott\\Downloads\\docs\\4IT401__AF_II_03_Rizeni_IT__2022__cz.pdf"
+file_path = "4IT401__AF_II_04_IT_aplikace__2022__cz.pdf"
 elements = partition(file_path, include_page_breaks=False)
 filtered_elements = [element for element in elements if not isinstance(element, (Header, Footer))]
 #Clean line break dashes, bullets, whitespaces, non ascii characters and punctuation from elements
