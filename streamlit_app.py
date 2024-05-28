@@ -98,17 +98,7 @@ def transform_chunks(chunks):
 
 
 corrected_chunks = transform_chunks(chunks)
-st.write(
-    "Has environment variables been set:",
-    os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"],
-)
 
-
-embeddings = OpenAIEmbeddings()
-new_client = chromadb.EphemeralClient()
-openai_lc_client = Chroma.from_documents(
-    corrected_chunks, embeddings, client=new_client, collection_name="unstructured",collection_metadata={"hnsw:space": "cosine"}
-)
 
 #############################
 #chatbot streamlit a funkce ##################
@@ -156,7 +146,17 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+st.write(
+    "Has environment variables been set:",
+    os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"],
+)
 
+
+embeddings = OpenAIEmbeddings()
+new_client = chromadb.EphemeralClient()
+openai_lc_client = Chroma.from_documents(
+    corrected_chunks, embeddings, client=new_client, collection_name="unstructured",collection_metadata={"hnsw:space": "cosine"}
+)
 st.markdown(
     """
     <style>
