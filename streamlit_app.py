@@ -24,13 +24,8 @@ import string
 
 #### LOAD DOC ########################################
 ###################################################
-file_paths = [
-    "4IT401__AF_II_04_IT_aplikace__2022__cz.pdf",
-    "4IT409__artificial-intelligence-hiring-and-induction-unilever-experience__2024__en.pdf"
-]
-
-for file_path in file_paths:
-    elements = partition(file_path, include_page_breaks=False)
+file_path = "4IT409__artificial-intelligence-hiring-and-induction-unilever-experience__2024__en.pdf"
+elements = partition(file_path, include_page_breaks=False)
 filtered_elements = [element for element in elements if not isinstance(element, (Header, Footer))]
 #Clean line break dashes, bullets, whitespaces, non ascii characters and punctuation from elements
 
