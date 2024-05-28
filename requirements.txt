@@ -3,3 +3,4 @@ openai
 chromadb
 tika
 langchain
+langchain-community
