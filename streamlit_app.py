@@ -192,9 +192,9 @@ st.image("https://via.placeholder.com/150", width=150, caption="Your Logo")
 ###load model
 llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1",deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
 llm.model_kwargs = {
-    "temperature": 0.8,
+    "temperature": 0.4,
     "repetition_penalty": 1.2,
-    "max_new_tokens": 250,
+    "max_new_tokens": 350,
     "top_p": 0.9,
 }
 
@@ -203,7 +203,7 @@ prompt = PromptTemplate(
     1) Buď zvořilý a odpovídej přesně na položené otázky.
     2) Odpovídej v jazyce, ve kterém je položena otázka. Pokud není jazyk specifikovaný tak odpovídej v českém jazyce.
     3) Ber informace pouze z přidaného kontextu a pokud v něm nebudou informace požadované v otázce, zdvořile řekni, že nevíš.
-    4) Na konec přidej informaci o zdroji informací, tedy název dokumentu a kapitola nebo stránka.
+    4) Na konec přidej informaci o zdroji informací, tedy název dokumentu, kapitolu a stránku ze které jsi čerpal.
 Context: {context}
 Question: {question}
 """,
