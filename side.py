@@ -1,4 +1,5 @@
 __import__('pysqlite3')
+import pickle
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
@@ -174,3 +175,5 @@ new_client = chromadb.EphemeralClient()
 openai_lc_client = Chroma.from_documents(
     corrected_chunks, embeddings, client=new_client, collection_name="unstructured",collection_metadata={"hnsw:space": "cosine"}
 )
+with open('chromadb.pickle', 'wb') as handle:
+    pickle.dump(openai_lc_client, handle, protocol=pickle.HIGHEST_PROTOCOL)
