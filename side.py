@@ -160,7 +160,6 @@ def filter_documents(selected_idents: List[str], selected_names: List[str], sele
     ]
 
 
-embeddings = OpenAIEmbeddings(api_key="sk-proj-ux6IuzBN0yPdeYstgUcLT3BlbkFJZV2JXCEHharOeA6MZcrB")
 persist_directory = 'db'
 #client = chromadb.PersistentClient(path=persist_directory)
 openai_lc_client5 = Chroma.from_documents(
