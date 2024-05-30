@@ -108,7 +108,7 @@ corrected_chunks = transform_chunks(chunks)
 def similarity_search(query):
     # This is a placeholder for your similarity search function.
     # Replace it with the actual implementation.
-    return openai_lc_client.similarity_search(query)
+    return openai_lc_client5.similarity_search(query)
 
 # Function to generate response using similarity search and chat completion
 chat_history=[]
@@ -168,11 +168,11 @@ st.write(
     os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"],
 )
 
+
 embeddings = OpenAIEmbeddings()
-new_client = chromadb.EphemeralClient()
-openai_lc_client = Chroma.from_documents(
-    corrected_chunks, embeddings, client=new_client, collection_name="unstructured",collection_metadata={"hnsw:space": "cosine"}
-)
+persist_directory = 'db'
+openai_lc_client5 = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
+
 st.markdown(
     """
     <style>
