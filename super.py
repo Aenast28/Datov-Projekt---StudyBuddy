@@ -168,11 +168,11 @@ st.write(
     os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"],
 )
 
-
 embeddings = OpenAIEmbeddings()
-persist_directory = 'db'
-openai_lc_client5 = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
-
+new_client = chromadb.EphemeralClient()
+openai_lc_client = Chroma.from_documents(
+    corrected_chunks, embeddings, client=new_client, collection_name="unstructured",collection_metadata={"hnsw:space": "cosine"}
+)
 st.markdown(
     """
     <style>
