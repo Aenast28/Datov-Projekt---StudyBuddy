@@ -1,7 +1,7 @@
-__import__('pysqlite3')
+#__import__('pysqlite3')
 import pickle
 import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+#sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
 from typing import List, Dict
 from openai import OpenAI
@@ -13,6 +13,7 @@ from langchain.chains import LLMChain
 from langchain.prompts.prompt import PromptTemplate
 from tika import parser
 from langchain_community.llms import DeepInfra
+from langchain.vectorstores import Chroma
 import os
 from langchain_openai import OpenAIEmbeddings
 import chromadb
@@ -158,22 +159,13 @@ def filter_documents(selected_idents: List[str], selected_names: List[str], sele
            (not selected_languages or doc.metadata["Language"] in selected_languages)
     ]
 
-# Streamlit app layout with theme
-st.set_page_config(
-    page_title="VŠE AI Study Buddy",
-    page_icon=":robot_face:",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-st.write(
-    os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"],
-)
 
-
-embeddings = OpenAIEmbeddings()
-new_client = chromadb.EphemeralClient()
-openai_lc_client = Chroma.from_documents(
-    corrected_chunks, embeddings, client=new_client, collection_name="unstructured",collection_metadata={"hnsw:space": "cosine"}
+embeddings = OpenAIEmbeddings(api_key="sk-proj-ux6IuzBN0yPdeYstgUcLT3BlbkFJZV2JXCEHharOeA6MZcrB")
+persist_directory = 'db'
+#client = chromadb.PersistentClient(path=persist_directory)
+openai_lc_client5 = Chroma.from_documents(
+    corrected_chunks, embeddings,persist_directory=persist_directory,collection_metadata={"hnsw:space": "cosine"}
 )
-with open('chromadb.pickle', 'wb') as handle:
-    pickle.dump(openai_lc_client, handle, protocol=pickle.HIGHEST_PROTOCOL)
+openai_lc_client5.persist()
+persist_directory = 'db'
+openai_lc_client5 = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
