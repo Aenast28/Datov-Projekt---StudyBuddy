@@ -108,7 +108,7 @@ corrected_chunks = transform_chunks(chunks)
 def similarity_search(query):
     # This is a placeholder for your similarity search function.
     # Replace it with the actual implementation.
-    return openai_lc_client5.similarity_search(query)
+    return openai_lc_client.similarity_search(query)
 
 # Function to generate response using similarity search and chat completion
 chat_history=[]
