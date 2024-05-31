@@ -72,8 +72,6 @@ def extract_filename(output):
     if match:
         name_file = match.group(1)  # Aktualizace hodnoty name_file
         return name_file
-    else:
-        return None
 
 def generate_response(query):
     global name_file  # Deklarace globální proměnné name_file
@@ -103,9 +101,9 @@ def generate_response(query):
     
     # Store the query and response in chat history
     chat_history.append(f"User: {query}")
-    chat_history.append(f"Assistant: {response#['text']}")
+    chat_history.append(f"Assistant: {response['text']}")
     
-    return response#["text"]
+    return response["text"]
 
 # Extract unique metadata values for filters
 idents = list(set(idents))
