@@ -52,14 +52,6 @@ for pdf_file in pdf_files:
 #############################
 #chatbot streamlit a funkce ##################
 #############################
-def extract_filename(output):
-    output_str = str(output)  # Převést vstup na řetězec
-    # Regular expression to find the first filename in the metadata
-    match = re.search(r"metadata=\{'filename': '([^']*)'", output_str)
-    if match:
-        return match.group(1)
-    else:
-        return None
 # Assume you have a similarity search function defined, which searches documents based on a query
 def similarity_search(query):
     # This is a placeholder for your similarity search function.
@@ -68,12 +60,29 @@ def similarity_search(query):
 
 # Function to generate response using similarity search and chat completion
 chat_history=[]
+import re
+
+# Definice proměnné name_file
+name_file = None
+
+def extract_filename(output):
+    global name_file  # Deklarace globální proměnné name_file
+    output_str = str(output)  # Převést vstup na řetězec
+    # Regular expression to find the first filename in the metadata
+    match = re.search(r"metadata=\{'filename': '([^']*)'", output_str)
+    if match:
+        name_file = match.group(1)  # Aktualizace hodnoty name_file
+        return name_file
+    else:
+        return None
+
 def generate_response(query):
+    global name_file  # Deklarace globální proměnné name_file
     # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
     top_documents = docs[:3]  # Select the top three documents
-    name_file.clear()
-    name_file=extract_filename(top_documents)
+    extract_filename(top_documents)  # Volání funkce extract_filename
+    
     # Create the context from the top documents
     document_context = "\n\n".join([doc.page_content for doc in top_documents])
     
@@ -98,6 +107,7 @@ def generate_response(query):
     chat_history.append(f"Assistant: {response['text']}")
     
     return response["text"]
+
 # Extract unique metadata values for filters
 idents = list(set(idents))
 names = list(set(names))
