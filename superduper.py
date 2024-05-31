@@ -25,7 +25,7 @@ import string
 #### LOAD DOC ########################################
 ###################################################
 # Nastavit cestu k složce s PDF soubory
-folder_path = "C:\\Users\\blank\\Datov-Projekt---StudyBuddy\\docs"
+folder_path = "docs"
 
 # Získat seznam všech PDF souborů ve složce
 pdf_files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
