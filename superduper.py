@@ -206,7 +206,7 @@ with open(name_file, "rb") as pdf_file:
 
 st.download_button(label="Download last cited document",
                     data=PDFbyte,
-                    file_name="name.pdf",
+                    file_name=name_file,
                     mime='application/octet-stream')
 
 # Accept user input
