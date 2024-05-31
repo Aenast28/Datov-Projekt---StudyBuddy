@@ -35,7 +35,7 @@ idents = []
 names = []
 years = []
 languages = []
-
+name_file=[]
 # Načíst obsah všech PDF souborů a extrahovat hodnoty z názvů
 for pdf_file in pdf_files:
     # Extrahovat hodnoty z názvu souboru
@@ -53,7 +53,12 @@ for pdf_file in pdf_files:
 #############################
 #chatbot streamlit a funkce ##################
 #############################
-
+def extract_filename(output, name_file):
+    # Regular expression to find the first filename in the metadata
+    match = re.search(r"metadata=\{'filename': '([^']*)'", output)
+    if match:
+        name_file.clear()  # Clear the list to ensure it only contains the latest filename
+        name_file.append(match.group(1))
 # Assume you have a similarity search function defined, which searches documents based on a query
 def similarity_search(query):
     # This is a placeholder for your similarity search function.
@@ -66,7 +71,7 @@ def generate_response(query):
     # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
     top_documents = docs[:3]  # Select the top three documents
-
+    extract_filename(top_documents,name_file)
     # Create the context from the top documents
     document_context = "\n\n".join([doc.page_content for doc in top_documents])
     
@@ -185,7 +190,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # download document button
-with open(file_path, "rb") as pdf_file:
+with open(name_file, "rb") as pdf_file:
     PDFbyte = pdf_file.read()
 
 st.download_button(label="Download last cited document",
