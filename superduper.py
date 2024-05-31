@@ -146,7 +146,7 @@ selected_years = st.sidebar.multiselect("Filter by Year", years)
 selected_languages = st.sidebar.multiselect("Filter by Language", languages)
 
 # Filter documents based on selections
-filtered_documents = filter_documents(selected_idents, selected_names, selected_years, selected_languages)
+#filtered_documents = filter_documents(selected_idents, selected_names, selected_years, selected_languages)
 
 st.sidebar.title("Documents")
 
