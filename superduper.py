@@ -185,7 +185,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # download document button
-with open(file_path, "rb") as pdf_file:
+with open(folder_path, "rb") as pdf_file:
     PDFbyte = pdf_file.read()
 
 st.download_button(label="Download last cited document",
