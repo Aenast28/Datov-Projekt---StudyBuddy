@@ -62,7 +62,7 @@ chat_history=[]
 import re
 
 # Definice proměnné name_file
-name_file = "4IT401__AF_II_04_IT_aplikace__2022__cz.pdf"
+name_file = ""
 
 def extract_filename(output):
     global name_file  # Deklarace globální proměnné name_file
