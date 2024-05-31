@@ -26,7 +26,7 @@ import string
 ###################################################
 # Nastavit cestu k složce s PDF soubory
 folder_path = "docs"
-
+file_path = "4IT401__AF_II_05_02_DAX__2022__cz.pdf"
 # Získat seznam všech PDF souborů ve složce
 pdf_files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
 
@@ -185,7 +185,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # download document button
-with open(folder_path, "rb") as pdf_file:
+with open(file_path, "rb") as pdf_file:
     PDFbyte = pdf_file.read()
 
 st.download_button(label="Download last cited document",
