@@ -79,7 +79,7 @@ def generate_response(query):
     global name_file  # Deklarace globální proměnné name_file
     # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
-    top_documents = docs#[:3]  # Select the top three documents
+    top_documents = docs[:3]  # Select the top three documents
     extract_filename(top_documents)  # Volání funkce extract_filename
     
     # Create the context from the top documents
