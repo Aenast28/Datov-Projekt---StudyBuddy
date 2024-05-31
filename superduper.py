@@ -26,7 +26,6 @@ import string
 ###################################################
 # Nastavit cestu k složce s PDF soubory
 folder_path = "docs"
-name_file = "4IT401__AF_II_04_IT_aplikace__2022__cz.pdf"
 # Získat seznam všech PDF souborů ve složce
 pdf_files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
 
@@ -63,7 +62,7 @@ chat_history=[]
 import re
 
 # Definice proměnné name_file
-name_file = None
+name_file = "4IT401__AF_II_04_IT_aplikace__2022__cz.pdf"
 
 def extract_filename(output):
     global name_file  # Deklarace globální proměnné name_file
