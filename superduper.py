@@ -97,16 +97,6 @@ names = list(set(names))
 years = list(set(years))
 languages = list(set(languages))
 
- # Function to filter documents by selected metadata
-def filter_documents(selected_idents: List[str], selected_names: List[str], selected_years: List[str], selected_languages: List[str]) -> List[Document]:
-     return [
-         doc for doc in corrected_chunks
-         if (not selected_idents or doc.metadata["Ident"] in selected_idents) and
-            (not selected_names or doc.metadata["Name"] in selected_names) and
-            (not selected_years or doc.metadata["Year"] in selected_years) and
-            (not selected_languages or doc.metadata["Language"] in selected_languages)
-     ]
-
 # Streamlit app layout with theme
 st.set_page_config(
     page_title="VŠE AI Study Buddy",
@@ -146,15 +136,11 @@ selected_years = st.sidebar.multiselect("Filter by Year", years)
 selected_languages = st.sidebar.multiselect("Filter by Language", languages)
 
 # Filter documents based on selections
-filtered_documents = filter_documents(selected_idents, selected_names, selected_years, selected_languages)
 
 st.sidebar.title("Documents")
 
-# Use a set comprehension to get unique names directly from the documents
-unique_names = {doc.metadata['Name'] for doc in filtered_documents}
-
 # Iterate over the unique names and write them to the sidebar
-for name in unique_names:
+for name in names:
     st.sidebar.write(f"Title: {name}")
 
 st.title("VŠE AI Study Buddy")
