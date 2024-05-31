@@ -64,21 +64,16 @@ import re
 # Definice proměnné name_file
 name_file = "4IT401__AF_II_04_IT_aplikace__2022__cz.pdf"
 
-def extract_filename(output):
-    global name_file  # Deklarace globální proměnné name_file
-    output_str = str(output)  # Převést vstup na řetězec
-    name_file = ""
-    match = re.search(r"metadata=\{'filename': '([^']*)'", output_str)
-    if match:
-        name_file = match.group(1)  # Aktualizace hodnoty name_file
-        return name_file
-
 def generate_response(query):
     global name_file  # Deklarace globální proměnné name_file
     # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
     top_documents = docs[:3]  # Select the top three documents   
-    extract_filename(top_documents)  # Volání funkce extract_filename
+    top_documents1 = str(top_documents)  # Převést vstup na řetězec
+    name_file = ""
+    match = re.search(r"metadata=\{'filename': '([^']*)'", top_documents1)
+    if match:
+        name_file = match.group(1)  # Aktualizace hodnoty name_file
     # Create the context from the top documents
     document_context = "\n\n".join([doc.page_content for doc in top_documents])
     
