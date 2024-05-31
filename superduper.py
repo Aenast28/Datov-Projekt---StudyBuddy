@@ -72,6 +72,7 @@ def generate_response(query):
     # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
     top_documents = docs[:3]  # Select the top three documents
+    name_file.clear()
     name_file=extract_filename(top_documents)
     # Create the context from the top documents
     document_context = "\n\n".join([doc.page_content for doc in top_documents])
