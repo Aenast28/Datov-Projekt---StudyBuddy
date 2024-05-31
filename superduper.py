@@ -105,7 +105,7 @@ def generate_response(query):
     chat_history.append(f"User: {query}")
     chat_history.append(f"Assistant: {response['text']}")
     
-    return response["text"]
+    return response#["text"]
 
 # Extract unique metadata values for filters
 idents = list(set(idents))
