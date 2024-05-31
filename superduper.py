@@ -72,9 +72,6 @@ def generate_response(query):
     top_documents1 = str(top_documents)  # Převést vstup na řetězec
     name_file = ""
     match = re.search(r"metadata=\{'filename': '([^']*)'", top_documents1)
-    if match:
-        if name_file:  # Pokud už existuje hodnota name_file
-        name_file += match.group(1)  # Připojíme nalezenou hodnotu na konec
     # Create the context from the top documents
     document_context = "\n\n".join([doc.page_content for doc in top_documents])
     
