@@ -53,8 +53,9 @@ for pdf_file in pdf_files:
 #chatbot streamlit a funkce ##################
 #############################
 def extract_filename(output):
+    output_str = str(output)  # Převést vstup na řetězec
     # Regular expression to find the first filename in the metadata
-    match = re.search(r"metadata=\{'filename': '([^']*)'", output)
+    match = re.search(r"metadata=\{'filename': '([^']*)'", output_str)
     if match:
         return match.group(1)
     else:
