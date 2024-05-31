@@ -98,7 +98,7 @@ years = list(set(years))
 languages = list(set(languages))
 
  # Function to filter documents by selected metadata
- def filter_documents(selected_idents: List[str], selected_names: List[str], selected_years: List[str], selected_languages: List[str]) -> List[Document]:
+def filter_documents(selected_idents: List[str], selected_names: List[str], selected_years: List[str], selected_languages: List[str]) -> List[Document]:
      return [
          doc for doc in corrected_chunks
          if (not selected_idents or doc.metadata["Ident"] in selected_idents) and
