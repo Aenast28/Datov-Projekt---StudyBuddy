@@ -67,7 +67,7 @@ name_file = "4IT401__AF_II_04_IT_aplikace__2022__cz.pdf"
 def extract_filename(output):
     global name_file  # Deklarace globální proměnné name_file
     output_str = str(output)  # Převést vstup na řetězec
-    # Regular expression to find the first filename in the metadata
+    name_file = ""
     match = re.search(r"metadata=\{'filename': '([^']*)'", output_str)
     if match:
         name_file = match.group(1)  # Aktualizace hodnoty name_file
