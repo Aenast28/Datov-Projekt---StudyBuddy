@@ -77,7 +77,8 @@ def generate_response(query):
     global name_file  # Deklarace globální proměnné name_file
     # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
-    top_documents = docs[:3]  # Select the top three documents    
+    top_documents = docs[:3]  # Select the top three documents   
+    extract_filename(top_documents)  # Volání funkce extract_filename
     # Create the context from the top documents
     document_context = "\n\n".join([doc.page_content for doc in top_documents])
     
@@ -101,7 +102,7 @@ def generate_response(query):
     chat_history.append(f"User: {query}")
     chat_history.append(f"Assistant: {response['text']}")
     
-    return response["text"]
+    return response["text"], name_file
 
 # Extract unique metadata values for filters
 idents = list(set(idents))
@@ -213,7 +214,6 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
     with st.chat_message("user"):
         st.markdown(prompt)
     with st.chat_message("assistant"):
-        extract_filename(top_documents)  
         response = generate_response(prompt)
         st.markdown(response)
     st.session_state.messages.append({"role": "assistant", "content": response})
