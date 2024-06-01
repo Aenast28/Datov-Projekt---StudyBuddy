@@ -238,13 +238,4 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
     if name_file:
         with open(name_file, "rb") as pdf_file:
             PDFbyte = pdf_file.read()
-        
-        container_pdf, container_chat = st.columns([50, 50])
-        
-        
-        with container_pdf:
-        
-            if PDFbyte:
-                binary_data = PDFbyte.getvalue()
-                pdf_viewer(input=binary_data,
-                           width=700)
+            st.write(PDFbyte)
