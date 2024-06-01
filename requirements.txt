@@ -3,6 +3,7 @@ openai
 chromadb
 tika
 langchain
+streamlit-pdf-viewer
 PyPDF2
 langchain-community
 langchain_openai
