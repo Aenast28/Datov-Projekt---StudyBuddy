@@ -231,6 +231,6 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
     with st.chat_message("user"):
         st.markdown(prompt)
     with st.chat_message("assistant"):
-        response, name_file = generate_response(prompt)
+        response = generate_response(prompt)
         st.markdown(response)
     st.session_state.messages.append({"role": "assistant", "content": response})
