@@ -247,11 +247,13 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
     st.session_state.messages.append({"role": "assistant", "content": response})
         # Aktualizace tlačítka pro stahování s aktuálním souborem
     if name_file:
-        # Opening file from file path
-        with open(name_file, "rb") as f:
-            base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-    
-        # Embedding PDF in HTML
-        pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf"></iframe>'    
-        # Displaying File
-        st.markdown(pdf_display, unsafe_allow_html=True)
+        # Konvertuj PDF na obrázky
+        with tempfile.TemporaryDirectory() as path:
+            images_from_path = convert_from_path(name_file, output_folder=none, dpi=200)
+            for i, image in enumerate(images_from_path):
+                image.save(f'{path}/page_{i}.png')
+        
+            # Zobraz obrázky v streamlitu
+            for i, image_path in enumerate(images_from_path):
+                img = Image.open(image_path)
+                st.image(img, caption=f'Stránka {i+1}', use_column_width=True)
