@@ -38,7 +38,7 @@ def extract_text_from_pdf(pdf_path):
         num_pages = len(pdf_reader.pages)
         for page_num in range(num_pages):
             page = pdf_reader.pages[page_num]
-            text += page.extractText()
+            text += page.extract_text()
     return text
 
 # Seznamy pro uložení jednotlivých hodnot
