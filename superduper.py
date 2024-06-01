@@ -259,6 +259,7 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
         
         # Zobrazení PDF v kontejneru
         with pdf_container:
-            st.write(PDFbyte)
+           pdf_viewer(PDFbyte)
+
 
 
