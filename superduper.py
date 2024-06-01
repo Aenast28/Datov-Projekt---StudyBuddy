@@ -27,6 +27,7 @@ from unstructured.partition.auto import partition
 from unstructured.cleaners.core import clean
 from unstructured.documents.elements import Header, Footer
 import string
+from streamlit_pdf_viewer import pdf_viewer
 
 #### LOAD DOC ########################################
 ###################################################
@@ -251,13 +252,7 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
     st.session_state.messages.append({"role": "assistant", "content": response})
         # Aktualizace tlačítka pro stahování s aktuálním souborem
     if name_file:
-        # Konvertuj PDF na obrázky
-        with tempfile.TemporaryDirectory() as path:
-            images_from_path = convert_from_path(name_file, output_folder=path, dpi=200)
-            for i, image in enumerate(images_from_path):
-                image.save(f'{path}/page_{i}.png')
-        
-            # Zobraz obrázky v streamlitu
-            for i, image_path in enumerate(images_from_path):
-                img = Image.open(image_path)
-                st.image(img, caption=f'Stránka {i+1}', use_column_width=True)
+        with open(name_file, "rb") as pdf_file:
+             PDFbyte = pdf_file.read()
+             pdf_viewer(PDFbyte)
+
