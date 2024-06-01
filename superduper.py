@@ -29,6 +29,16 @@ import string
 folder_path = "docs"
 # Získat seznam všech PDF souborů ve složce
 pdf_files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
+# Funkce pro extrakci textu z PDF souboru
+def extract_text_from_pdf(pdf_path):
+    text = ""
+    with open(pdf_path, "rb") as pdf_file:
+        pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+        num_pages = pdf_reader.numPages
+        for page_num in range(num_pages):
+            page = pdf_reader.getPage(page_num)
+            text += page.extractText()
+    return text
 
 # Seznamy pro uložení jednotlivých hodnot
 idents = []
@@ -237,5 +247,5 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
         # Aktualizace tlačítka pro stahování s aktuálním souborem
     if name_file:
         with open(name_file, "rb") as pdf_file:
-            PDFbyte = pdf_file.read()
-            st.write(PDFbyte)
+            pdf_text = extract_text_from_pdf(name_file)
+            st.write(pdf_text)
