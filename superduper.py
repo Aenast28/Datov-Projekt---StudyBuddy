@@ -214,14 +214,14 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# download document button
-with open(name_file, "rb") as pdf_file:
-    PDFbyte = pdf_file.read()
+if file_name:
+    with open(file_name, "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
 
-st.download_button(label="Download last cited document",
-                    data=PDFbyte,
-                    file_name=name_file,
-                    mime='application/octet-stream')
+    st.download_button(label="Download last cited document",
+                        data=PDFbyte,
+                        file_name=file_name,
+                        mime='application/octet-stream')
 
 # Accept user input
 if prompt := st.chat_input("Jak mohu pomoci?"):
