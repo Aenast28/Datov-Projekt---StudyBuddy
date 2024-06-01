@@ -1,6 +1,10 @@
 __import__('pysqlite3')
 import sys
 import base64
+from pdf2image import convert_from_path
+from PIL import Image
+import streamlit as st
+import tempfile
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
 from typing import List, Dict
