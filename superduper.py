@@ -239,8 +239,12 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
         with open(name_file, "rb") as pdf_file:
             PDFbyte = pdf_file.read()
         
-        base64_pdf = base64.b64encode(PDFbyte).decode('utf-8')
+        container_pdf, container_chat = st.columns([50, 50])
         
-        # Použijeme iframe pro zobrazení PDF souboru
-        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf"></iframe>'
-        st.markdown(pdf_display, unsafe_allow_html=True)
+        
+        with container_pdf:
+        
+            if PDFbyte:
+                binary_data = PDFbyte.getvalue()
+                pdf_viewer(input=binary_data,
+                           width=700)
