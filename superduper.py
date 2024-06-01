@@ -214,9 +214,6 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-with open(name_file, "rb") as pdf_file:
-        PDFbyte = pdf_file.read()
-
 st.download_button(label="Download last cited document",
                         data=PDFbyte,
                         file_name=name_file,
