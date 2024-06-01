@@ -214,11 +214,10 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-if name_file:
-    with open(name_file, "rb") as pdf_file:
+with open(name_file, "rb") as pdf_file:
         PDFbyte = pdf_file.read()
 
-    st.download_button(label="Download last cited document",
+st.download_button(label="Download last cited document",
                         data=PDFbyte,
                         file_name=name_file,
                         mime='application/octet-stream')
@@ -231,6 +230,8 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
     with st.chat_message("user"):
         st.markdown(prompt)
     with st.chat_message("assistant"):
-        response = generate_response(prompt)
+        response, name_file = generate_response(prompt)
         st.markdown(response)
+    with open(name_file, "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
     st.session_state.messages.append({"role": "assistant", "content": response})
