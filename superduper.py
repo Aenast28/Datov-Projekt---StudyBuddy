@@ -1,5 +1,6 @@
 __import__('pysqlite3')
 import sys
+import base64
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
 from typing import List, Dict
@@ -238,6 +239,8 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
         with open(name_file, "rb") as pdf_file:
             PDFbyte = pdf_file.read()
         
-                # Použijeme iframe pro zobrazení PDF souboru
-        st.write("### Last Cited Document")
-        st.markdown(f'<iframe src="data:application/pdf;base64,{PDFbyte.encode("base64").decode()}" width="700" height="1000" type="application/pdf"></iframe>', unsafe_allow_html=True)
+        base64_pdf = base64.b64encode(PDFbyte).decode('utf-8')
+        
+        # Použijeme iframe pro zobrazení PDF souboru
+        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf"></iframe>'
+        st.markdown(pdf_display, unsafe_allow_html=True)
