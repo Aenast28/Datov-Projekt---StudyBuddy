@@ -252,6 +252,13 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
         # Aktualizace tlačítka pro stahování s aktuálním souborem
     if name_file:
         with open(name_file, "rb") as pdf_file:
-             PDFbyte = pdf_file.read()
-             pdf_viewer(PDFbyte)
+            PDFbyte = pdf_file.read()
+        
+        # Vytvoření kontejneru pro zobrazení PDF
+        pdf_container = st.container()
+        
+        # Zobrazení PDF v kontejneru
+        with pdf_container:
+            st.write(PDFbyte)
+
 
