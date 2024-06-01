@@ -89,7 +89,7 @@ def generate_response(query):
     match = re.search(r"metadata=\{.*'Name': '([^']*)'.*\}", top_documents1)
     if match:
         partial_name = match.group(1)
-        directory = r"C:\Users\blank\Datov-Projekt---StudyBuddy\docs"
+        directory = r"docs"
         file_path = find_file_by_partial_name(directory, partial_name)
         if file_path:
             name_file = file_path
@@ -117,7 +117,7 @@ def generate_response(query):
     chat_history.append(f"User: {query}")
     chat_history.append(f"Assistant: {response['text']}")
     
-    return top_documents1
+    return response["text"], name_file
 
 
 
