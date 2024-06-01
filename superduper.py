@@ -242,3 +242,6 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
                            data=PDFbyte,
                            file_name=name_file,
                            mime='application/octet-stream')
+                # Use st.file_uploader and st.pdf to display the file
+        st.write("### Last Cited Document")
+        st.pdf(PDFbyte)
