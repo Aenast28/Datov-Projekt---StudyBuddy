@@ -85,11 +85,11 @@ def generate_response(query):
     # Clear the current string in name_file
     name_file = ""
     
-    # Search for the filename in the documents
-    match = re.search(r"metadata=\{'Name': '([^']*)'", top_documents1)
+    # Search for the "Name" in the metadata of the documents
+    match = re.search(r"metadata=\{.*'Name': '([^']*)'.*\}", top_documents1)
     if match:
         partial_name = match.group(1)
-        directory = r"docs"
+        directory = r"C:\Users\blank\Datov-Projekt---StudyBuddy\docs"
         file_path = find_file_by_partial_name(directory, partial_name)
         if file_path:
             name_file = file_path
