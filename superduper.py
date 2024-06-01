@@ -175,6 +175,7 @@ st.markdown(
 )
 
 st.sidebar.title("Document Filters")
+pdf_container = st.empty()
 
 # Filters
 selected_idents = st.sidebar.multiselect("Filter by Ident", idents)
@@ -253,5 +254,5 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
     if name_file:
         with open(name_file, "rb") as pdf_file:
              PDFbyte = pdf_file.read()
-             pdf_viewer(PDFbyte)
+             pdf_container.pdf_viewer(PDFbyte)
 
