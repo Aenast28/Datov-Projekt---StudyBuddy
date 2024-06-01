@@ -64,6 +64,17 @@ import re
 # Definice proměnné name_file
 name_file = "4IT401__AF_II_04_IT_aplikace__2022__cz.pdf"
 
+import re
+import os
+
+def find_file_by_partial_name(directory, partial_name):
+    pattern = re.compile(rf".*__{partial_name}__.*")
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if pattern.match(file):
+                return os.path.join(root, file)
+    return None
+
 def generate_response(query):
     global name_file  # Deklarace globální proměnné name_file
     # Perform similarity search to retrieve relevant documents
@@ -75,12 +86,14 @@ def generate_response(query):
     name_file = ""
     
     # Search for the filename in the documents
-    match = re.search(r"metadata=\{'filename': '([^']*)'", top_documents1)
+    match = re.search(r"metadata=\{'Name': '([^']*)'", top_documents1)
     if match:
-        # Update name_file with the new filename
-        name_file = match.group(1)
-    else: 
-        name_file= "4IT409__artificial-intelligence-hiring-and-induction-unilever-experience__2024__en.pdf"
+        partial_name = match.group(1)
+        directory = r"docs"
+        file_path = find_file_by_partial_name(directory, partial_name)
+        if file_path:
+            name_file = file_path
+    
     # Create the context from the top documents
     document_context = "\n\n".join([doc.page_content for doc in top_documents])
     
@@ -104,7 +117,8 @@ def generate_response(query):
     chat_history.append(f"User: {query}")
     chat_history.append(f"Assistant: {response['text']}")
     
-    return top_documents
+    return response["text"], name_file
+
 
 
 # Extract unique metadata values for filters
