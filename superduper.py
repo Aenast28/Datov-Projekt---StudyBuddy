@@ -64,8 +64,6 @@ import re
 # Definice proměnné name_file
 name_file = "4IT401__AF_II_04_IT_aplikace__2022__cz.pdf"
 
-import re
-
 def generate_response(query):
     global name_file  # Deklarace globální proměnné name_file
     # Perform similarity search to retrieve relevant documents
@@ -106,7 +104,7 @@ def generate_response(query):
     chat_history.append(f"User: {query}")
     chat_history.append(f"Assistant: {response['text']}")
     
-    return response
+    return top_documents
 
 
 # Extract unique metadata values for filters
