@@ -185,7 +185,7 @@ selected_languages = st.sidebar.multiselect("Filter by Language", languages)
 # Filter documents based on selections
 
 st.sidebar.title("Documents")
-
+st.sidebar.title("Preview")
 # Iterate over the unique names and write them to the sidebar
 for name in names:
     st.sidebar.write(f"Title: {name}")
@@ -254,5 +254,5 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
     if name_file:
         with open(name_file, "rb") as pdf_file:
              PDFbyte = pdf_file.read()
-             pdf_viewer(PDFbyte)
+             st.sidebar.pdf_viewer(PDFbyte)
 
