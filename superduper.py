@@ -253,7 +253,7 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
     if name_file:
         # Konvertuj PDF na obrázky
         with tempfile.TemporaryDirectory() as path:
-            images_from_path = convert_from_path(name_file, output_folder=none, dpi=200)
+            images_from_path = convert_from_path(name_file, output_folder=path, dpi=200)
             for i, image in enumerate(images_from_path):
                 image.save(f'{path}/page_{i}.png')
         
