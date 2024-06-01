@@ -3,6 +3,7 @@ openai
 chromadb
 tika
 langchain
+PyPDF2
 langchain-community
 langchain_openai
 unstructured[all-docs]
