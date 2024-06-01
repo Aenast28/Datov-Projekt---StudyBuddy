@@ -255,7 +255,7 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
             PDFbyte = pdf_file.read()
         
         # Vytvoření kontejneru pro zobrazení PDF
-        pdf_container = st.container()
+        pdf_container = st.container(height=350,border=True)
         
         # Zobrazení PDF v kontejneru
         with pdf_container:
