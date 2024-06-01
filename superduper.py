@@ -238,10 +238,6 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
         with open(name_file, "rb") as pdf_file:
             PDFbyte = pdf_file.read()
         
-        st.download_button(label="Download last cited document",
-                           data=PDFbyte,
-                           file_name=name_file,
-                           mime='application/octet-stream')
-                # Use st.file_uploader and st.pdf to display the file
+                # Použijeme iframe pro zobrazení PDF souboru
         st.write("### Last Cited Document")
-        st.pdf(PDFbyte)
+        st.markdown(f'<iframe src="data:application/pdf;base64,{PDFbyte.encode("base64").decode()}" width="700" height="1000" type="application/pdf"></iframe>', unsafe_allow_html=True)
