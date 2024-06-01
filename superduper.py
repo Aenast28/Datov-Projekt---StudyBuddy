@@ -17,6 +17,7 @@ import os
 from langchain_openai import OpenAIEmbeddings
 import chromadb
 import re
+import PyPDF2
 from unstructured.chunking.title import chunk_by_title
 from unstructured.partition.auto import partition
 from unstructured.cleaners.core import clean
