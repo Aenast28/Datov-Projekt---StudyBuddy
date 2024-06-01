@@ -247,6 +247,12 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
     st.session_state.messages.append({"role": "assistant", "content": response})
         # Aktualizace tlačítka pro stahování s aktuálním souborem
     if name_file:
-        with open(name_file, "rb") as pdf_file:
-            pdf_text = extract_text_from_pdf(name_file)
-            st.write(pdf_text)
+        # Opening file from file path
+        with open(name_file, "rb") as f:
+            base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+    
+        # Embedding PDF in HTML
+        pdf_display = F'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
+    
+        # Displaying File
+        st.markdown(pdf_display, unsafe_allow_html=True)
