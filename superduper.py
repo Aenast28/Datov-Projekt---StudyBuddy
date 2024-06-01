@@ -64,14 +64,25 @@ import re
 # Definice proměnné name_file
 name_file = "4IT401__AF_II_04_IT_aplikace__2022__cz.pdf"
 
+import re
+
 def generate_response(query):
     global name_file  # Deklarace globální proměnné name_file
     # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
-    top_documents = docs[:3]  # Select the top three documents   
+    top_documents = docs[:3]  # Select the top three documents
     top_documents1 = str(top_documents)  # Převést vstup na řetězec
+    
+    # Clear the current string in name_file
     name_file = ""
+    
+    # Search for the filename in the documents
     match = re.search(r"metadata=\{'filename': '([^']*)'", top_documents1)
+    if match:
+        # Update name_file with the new filename
+        name_file = match.group(1)
+    else: 
+        name_file= "4IT409__artificial-intelligence-hiring-and-induction-unilever-experience__2024__en.pdf"
     # Create the context from the top documents
     document_context = "\n\n".join([doc.page_content for doc in top_documents])
     
@@ -96,6 +107,7 @@ def generate_response(query):
     chat_history.append(f"Assistant: {response['text']}")
     
     return response["text"], name_file
+
 
 # Extract unique metadata values for filters
 idents = list(set(idents))
