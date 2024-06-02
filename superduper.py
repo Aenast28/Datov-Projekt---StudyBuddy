@@ -230,12 +230,7 @@ chat_chain = LLMChain(llm=llm, prompt=prompt)
 if "mixtral_model" not in st.session_state:
     st.session_state["mixtral_model"] = llm
 
-if "messages" not in st.session_state:
-    st.session_state.messages = []
 
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
 
 col1, col2 = st.columns([3, 2])
 with col2:
