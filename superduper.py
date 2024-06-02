@@ -237,10 +237,19 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
+def img_to_bytes(img_path):
+    img_bytes = Path(img_path).read_bytes()
+    encoded = base64.b64encode(img_bytes).decode()
+    return encoded
+def img_to_html(img_path):
+    img_html = "<img src='data:image/png;base64,{}' class='img-fluid'>".format(
+      img_to_bytes(img_path)
+    )
+    return img_html
 
 col1, col2 = st.columns([3, 2])
 with col2:
-    st.image("logo_fis.jpg", width=150, output_format='auto')
+    st.markdown(<p style='text-align: center; color: grey;'>"+img_to_html('logo_fis.jpg')+"</p>", unsafe_allow_html=True)
     st.markdown("<style>div.stImage {display: flex; justify-content: flex-end;}</style>", unsafe_allow_html=True)
     st.markdown("<h1 style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
     pdf_container = st.container(height=350, border=True)
