@@ -185,7 +185,7 @@ st.markdown(
     """
     <style>
     .green-title {
-        color: green;
+        color: #00957d;
     }
     </style>
     """,
