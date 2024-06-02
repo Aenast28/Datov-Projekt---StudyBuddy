@@ -202,11 +202,11 @@ st.markdown(
     unsafe_allow_html=True
 )
 st.markdown(
-    '<style>div.Widget.row-widget.stRadio > div{flex-direction:row;}</style>',
-    unsafe_allow_html=True,
+    '<style>.stImage>img {float:right;}</style>', 
+    unsafe_allow_html=True
 )
 
-st.image("logo_fis.jpg", width=150, align='right')
+st.image("logo_fis.jpg", width=150)
 st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
 
