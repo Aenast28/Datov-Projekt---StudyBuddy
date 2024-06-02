@@ -251,6 +251,9 @@ with col1:
     st.header("Chat with the AI")
     chat_container = st.container()
     with chat_container:
+        for message in st.session_state.messages:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
         # Chat window
         if prompt := st.chat_input("Jak mohu pomoci?"):
             # Add user message to chat history
