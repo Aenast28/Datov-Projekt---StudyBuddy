@@ -202,7 +202,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 # Použití barev pro titulek
-    # Použití barev pro titulek a zarovnání obrázku doprava
+current_path = os.getcwd()
+image_path = os.path.join(current_path, "logo_fis.jpg")
+
 st.markdown(
         """
         <div class="right-align">
