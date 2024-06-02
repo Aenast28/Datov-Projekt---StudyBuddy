@@ -239,7 +239,7 @@ for message in st.session_state.messages:
 
 col1, col2 = st.columns([3, 2])
 with col2:
-    st.markdown("<img src='logo_fis.jpg' width='100' style='display: block; margin: 0 auto;'>" , unsafe_allow_html=True)
+    st.image("logo_fis.jpg", width=150, output_format='auto')
     st.markdown("<style>div.stImage {display: flex; justify-content: flex-end;}</style>", unsafe_allow_html=True)
     st.markdown("<h1 style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
     pdf_container = st.container(height=350, border=True)
