@@ -28,7 +28,6 @@ from unstructured.cleaners.core import clean
 from unstructured.documents.elements import Header, Footer
 import string
 from streamlit_pdf_viewer import pdf_viewer
-os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"]
 
 #### LOAD DOC ########################################
 ###################################################
@@ -144,7 +143,7 @@ st.set_page_config(
 )
 
 
-#os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"]
+os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"]
 
 embeddings = OpenAIEmbeddings()
 persist_directory = 'db'
