@@ -220,6 +220,7 @@ for message in st.session_state.messages:
 
 col1, col2 = st.columns([3, 2])
 with col2:
+    st.header("Preview of the document")
     pdf_container = st.container(height=350,border=True)
 with col1:
     chat_container = st.container()
@@ -240,7 +241,6 @@ if name_file:
         with open(name_file, "rb") as pdf_file:
             PDFbyte = pdf_file.read()
             with col2:
-                st.header("Preview of the document")
                 # Zobrazení PDF v kontejneru
                 with pdf_container:
                      pdf_viewer(PDFbyte)
