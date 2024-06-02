@@ -237,14 +237,14 @@ with col2:
     st.image("logo_fis.jpg", width=125, output_format='auto')
     st.markdown("<style>div.stImage {display: flex; justify-content: flex-end;}</style>", unsafe_allow_html=True)
     st.markdown("<h1 style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
-    pdf_container = st.container(height=800, border=True)
+    pdf_container = st.container(height=650, border=True)
     
 
 with col1:
     st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
     st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
     st.header("Chat with the AI")
-    chat_container = st.container(height=800,border=True)
+    chat_container = st.container(height=650,border=True)
     with chat_container:
         if "messages" not in st.session_state:
             st.session_state.messages = []
