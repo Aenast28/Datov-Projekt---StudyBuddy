@@ -235,10 +235,9 @@ col1, col2 = st.columns([3, 2])
 with col2:
     st.image("logo_fis.jpg", width=125, output_format='auto')
     st.markdown("<style>div.stImage {display: flex; justify-content: flex-end;}</style>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
     pdf_container = st.container(height=650, border=True)
-    preview_container = st.container(bottom=pdf_container,border=True)
-    with preview_container:
-        st.markdown("<h1 style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
+
 
 
 with col1:
