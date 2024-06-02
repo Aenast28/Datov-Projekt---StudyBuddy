@@ -175,7 +175,6 @@ st.markdown(
 )
 
 st.sidebar.title("Document Filters")
-st.header("Chat with the AI")
 
 # Filters
 selected_idents = st.sidebar.multiselect("Filter by Ident", idents)
@@ -192,6 +191,7 @@ for name in names:
 
 st.title("VŠE AI Study Buddy")
 st.image("logo_fis.jpg", width=150)
+st.header("Chat with the AI")
 
 ###load model
 llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1",deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
