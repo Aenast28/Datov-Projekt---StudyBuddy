@@ -244,7 +244,7 @@ with col1:
     st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
     st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
     st.header("Chat with the AI")
-    chat_container = st.container()
+    chat_container = st.container(height=800,border=True)
     with chat_container:
         if "messages" not in st.session_state:
             st.session_state.messages = []
