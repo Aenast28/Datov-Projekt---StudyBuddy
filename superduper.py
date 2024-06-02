@@ -257,7 +257,7 @@ with col1:
             st.session_state.messages.append({"role": "user", "content": prompt})
             # Display user message in chat message container
             with st.chat_message("user"):
-                st.markdown(prompt):
+                st.markdown(prompt)
             with st.chat_message("assistant"):
                         response, name_file = generate_response(prompt)
                         st.markdown(response)
