@@ -218,31 +218,23 @@ chat_chain = LLMChain(llm=llm, prompt=prompt)
 if "mixtral_model" not in st.session_state:
     st.session_state["mixtral_model"] = llm
 
-# Initialize chat history
-#if "messages" not in st.session_state:
-#    st.session_state.messages = []
+ Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-# Display chat messages from history on app rerun
-#for message in st.session_state.messages:
-#    with st.chat_message(message["role"]):
-#        st.markdown(message["content"])
+ Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
 
 col1, col2 = st.columns([3, 2])
+st.header("Chat with the AI")
 with col2:
     pdf_container = st.container(height=350,border=True)
 with col1:
-    st.header("Chat with the AI")
     chat_container = st.container()
     with chat_container:
-        # Initialize chat history
-        if "messages" not in st.session_state:
-            st.session_state.messages = []
-        
-        # Display chat messages from history on app rerun
-        for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
         # Chat window
         if prompt := st.chat_input("Jak mohu pomoci?"):
             # Add user message to chat history
