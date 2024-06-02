@@ -180,7 +180,21 @@ st.sidebar.title("Documents")
 for name in names:
     st.sidebar.write(f"Title: {name}")
 
-st.title("VŠE AI Study Buddy")
+# Nastavení zelené barvy pro titulek pomocí CSS
+st.markdown(
+    """
+    <style>
+    .green-title {
+        color: green;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Použití zelené barvy pro titulek
+st.markdown("<h1 class='green-title'>VŠE AI Study Buddy</h1>", unsafe_allow_html=True)
+
 st.image("logo_fis.jpg", width=150)
 st.header("Chat with the AI")
 
