@@ -69,7 +69,7 @@ chat_history=[]
 import re
 
 # Definice proměnné name_file
-name_file = "4IT401__AF_II_04_IT_aplikace__2022__cz.pdf"
+name_file = ""
 
 import re
 import os
@@ -159,6 +159,7 @@ st.markdown(
     .css-1d391kg {
         color: green;
     }
+    
     </style>
     """,
     unsafe_allow_html=True
