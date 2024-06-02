@@ -185,6 +185,9 @@ import streamlit as st
 import streamlit as st
 
 # Nastavení barev pro titulek pomocí CSS
+import streamlit as st
+
+# Nastavení barev pro titulek pomocí CSS
 st.markdown(
     """
     <style>
@@ -196,9 +199,8 @@ st.markdown(
         color: black;
         font-size: 2.5em;
     }
-    .right-align {
-        display: flex;
-        justify-content: flex-end;
+    .right-align img {
+        float: right;
     }
     </style>
     """,
@@ -218,6 +220,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 st.header("Chat with the AI")
 
