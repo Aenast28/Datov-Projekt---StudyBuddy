@@ -256,12 +256,12 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
         with open(name_file, "rb") as pdf_file:
             PDFbyte = pdf_file.read()
             with col3:
-            # Vytvoření kontejneru pro zobrazení PDF
-            pdf_container = st.container(height=350,border=True)
-            
-            # Zobrazení PDF v kontejneru
-            with pdf_container:
-               pdf_viewer(PDFbyte)
+                # Vytvoření kontejneru pro zobrazení PDF
+                pdf_container = st.container(height=350,border=True)
+                
+                # Zobrazení PDF v kontejneru
+                with pdf_container:
+                   pdf_viewer(PDFbyte)
 
 
 
