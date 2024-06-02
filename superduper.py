@@ -179,29 +179,6 @@ st.sidebar.title("Documents")
 for name in names:
     st.sidebar.write(f"Title: {name}")
 
-# Nastavení barev pro titulek pomocí CSS
-st.markdown(
-    """
-    <style>
-    .vse-ai {
-        color: #00957d;
-        font-size: 3em;
-        margin-bottom: 0;
-    }
-    .study-buddy {
-        color: black;
-        font-size: 2.5em;
-        margin-top: 0;
-    }
-    .right-align {
-        display: flex;
-        justify-content: flex-end;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 
 
 ###load model
@@ -231,6 +208,27 @@ if "mixtral_model" not in st.session_state:
     st.session_state["mixtral_model"] = llm
 
 
+st.markdown(
+    """
+    <style>
+    .vse-ai {
+        color: #00957d;
+        font-size: 3em;
+        margin-bottom: 0;
+    }
+    .study-buddy {
+        color: black;
+        font-size: 2.5em;
+        margin-top: 0;
+    }
+    .right-align {
+        display: flex;
+        justify-content: flex-end;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 col1, col2 = st.columns([3, 2])
 with col2:
