@@ -35,16 +35,6 @@ from streamlit_pdf_viewer import pdf_viewer
 folder_path = "docs"
 # Získat seznam všech PDF souborů ve složce
 pdf_files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
-# Funkce pro extrakci textu z PDF souboru
-def extract_text_from_pdf(pdf_path):
-    text = ""
-    with open(pdf_path, "rb") as pdf_file:
-        pdf_reader = PyPDF2.PdfReader(pdf_file)
-        num_pages = len(pdf_reader.pages)
-        for page_num in range(num_pages):
-            page = pdf_reader.pages[page_num]
-            text += page.extract_text()
-    return text
 
 # Seznamy pro uložení jednotlivých hodnot
 idents = []
@@ -164,7 +154,7 @@ st.markdown(
     """
     <style>
     .css-18e3th9 {
-        background-color: #f0f0f0;
+        background-color: #00957d;
     }
     .css-1d391kg {
         color: green;
