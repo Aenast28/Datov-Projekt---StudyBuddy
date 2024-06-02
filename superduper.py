@@ -267,8 +267,10 @@ if name_file:
         with open(name_file, "rb") as pdf_file:
             PDFbyte = pdf_file.read()
             with col2:
-                # Zobrazení PDF v kontejneru
+                # Zobrazení PDF v kontejneru s rámečkem
                 with pdf_container:
-                     pdf_viewer(PDFbyte)
+                    st.markdown("<div style='border: 2px solid black; padding: 10px;'>", unsafe_allow_html=True)  # Začátek kontejneru s rámečkem
+                    pdf_viewer(PDFbyte)
+                    st.markdown("</div>", unsafe_allow_html=True)  # Konec kontejneru s rámečkem
 
 
