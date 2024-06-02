@@ -213,13 +213,14 @@ st.markdown(
     <style>
     .vse-ai {
         color: #00957d;
-        font-size: 3em;
-        margin-bottom: 0;
+        font-size: 2.5em; /* Adjusted font size */
+        margin-bottom: 0.2em; /* Reduced margin */
     }
     .study-buddy {
         color: black;
-        font-size: 2.5em;
+        font-size: 2em; /* Adjusted font size */
         margin-top: 0;
+        margin-bottom: 0.2em; /* Reduced margin */
     }
     .right-align {
         display: flex;
