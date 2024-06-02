@@ -201,14 +201,8 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-image_path = "logo_fis.jpg"
+st.image("logo_fis.jpg", width=150)
 
-
-# Nastavení CSS pro zarovnání obrázku doprava
-right_aligned_image = f'<div style="text-align:right"><img src="{image_path}"></div>'
-
-# Zobrazíme obrázek
-st.markdown(right_aligned_image, unsafe_allow_html=True)
 
 st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
