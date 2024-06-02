@@ -255,14 +255,13 @@ with col1:
                 st.markdown(response)
             st.session_state.messages.append({"role": "assistant", "content": response})
                 # Aktualizace tlačítka pro stahování s aktuálním souborem
-            if name_file:
-                with open(name_file, "rb") as pdf_file:
-                    PDFbyte = pdf_file.read()
-                    with col2:
-                        
-                        # Zobrazení PDF v kontejneru
-                        with pdf_container:
-                           pdf_viewer(PDFbyte)
 
-
+with col2:
+    pdf_container = st.container()
+    # Zobrazení PDF v kontejneru
+    with pdf_container:
+        if 'PDFbyte' in locals():
+            pdf_viewer(PDFbyte)
+        else:
+            st.write("Zde bude zobrazeno PDF.")
 
