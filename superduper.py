@@ -175,6 +175,7 @@ st.markdown(
 )
 
 st.sidebar.title("Document Filters")
+st.header("Chat with the AI")
 
 # Filters
 selected_idents = st.sidebar.multiselect("Filter by Ident", idents)
@@ -227,7 +228,6 @@ for message in st.session_state.messages:
 
 
 col1, col2 = st.columns([3, 2])
-st.header("Chat with the AI")
 with col2:
     pdf_container = st.container(height=350,border=True)
 with col1:
