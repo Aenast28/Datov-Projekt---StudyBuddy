@@ -180,20 +180,29 @@ st.sidebar.title("Documents")
 for name in names:
     st.sidebar.write(f"Title: {name}")
 
-# Nastavení zelené barvy pro titulek pomocí CSS
+import streamlit as st
+
+# Nastavení barev pro titulek pomocí CSS
 st.markdown(
     """
     <style>
-    .green-title {
+    .vse-ai {
         color: #00957d;
+        font-size: 3em;
+    }
+    .study-buddy {
+        color: black;
+        font-size: 2.5em;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Použití zelené barvy pro titulek
-st.markdown("<h1 class='green-title'>VŠE AI Study Buddy</h1>", unsafe_allow_html=True)
+# Použití barev pro titulek
+st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
+st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
+
 
 st.image("logo_fis.jpg", width=150)
 st.header("Chat with the AI")
