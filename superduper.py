@@ -242,26 +242,27 @@ col1, col2 = st.columns([3, 2])
 with col2:
     pdf_container = st.container(height=350,border=True)
 with col1:
-    # Accept user input
-    if prompt := st.chat_input("Jak mohu pomoci?"):
-        # Add user message to chat history
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        # Display user message in chat message container
-        with st.chat_message("user"):
-            st.markdown(prompt)
-        with st.chat_message("assistant"):
-            response, name_file = generate_response(prompt)
-            st.markdown(response)
-        st.session_state.messages.append({"role": "assistant", "content": response})
-            # Aktualizace tlačítka pro stahování s aktuálním souborem
-        if name_file:
-            with open(name_file, "rb") as pdf_file:
-                PDFbyte = pdf_file.read()
-                with col2:
-                    
-                    # Zobrazení PDF v kontejneru
-                    with pdf_container:
-                       pdf_viewer(PDFbyte)
+    chat_container = st.container()
+    with chat_container:
+        if prompt := st.chat_input("Jak mohu pomoci?"):
+            # Add user message to chat history
+            st.session_state.messages.append({"role": "user", "content": prompt})
+            # Display user message in chat message container
+            with st.chat_message("user"):
+                st.markdown(prompt)
+            with st.chat_message("assistant"):
+                response, name_file = generate_response(prompt)
+                st.markdown(response)
+            st.session_state.messages.append({"role": "assistant", "content": response})
+                # Aktualizace tlačítka pro stahování s aktuálním souborem
+            if name_file:
+                with open(name_file, "rb") as pdf_file:
+                    PDFbyte = pdf_file.read()
+                    with col2:
+                        
+                        # Zobrazení PDF v kontejneru
+                        with pdf_container:
+                           pdf_viewer(PDFbyte)
 
 
 
