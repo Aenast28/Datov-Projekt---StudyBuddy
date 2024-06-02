@@ -241,7 +241,6 @@ with col2:
 
 
 with col1:
-    st.markdown("<style>.assistant-response {background-color: green; color: white; border-radius: 5px; padding: 10px;}</style>", unsafe_allow_html=True)
     st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
     st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
     st.header("Chat with the AI")
@@ -258,10 +257,8 @@ with col1:
             st.session_state.messages.append({"role": "user", "content": prompt})
             # Display user message in chat message container
             with st.chat_message("user"):
-                st.markdown(prompt)
-            with st.container():
-                with st.markdown("", unsafe_allow_html=True, className="assistant-response"):
-                    with st.chat_message("assistant"):
+                st.markdown(prompt):
+            with st.chat_message("assistant"):
                         response, name_file = generate_response(prompt)
                         st.markdown(response)
                     st.session_state.messages.append({"role": "assistant", "content": response})
