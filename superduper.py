@@ -201,12 +201,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.markdown(
-    '<style>.stImage>img {float:right;}</style>', 
-    unsafe_allow_html=True
-)
 
-st.image("logo_fis.jpg", width=150)
 st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
 
@@ -249,6 +244,7 @@ for message in st.session_state.messages:
 
 col1, col2 = st.columns([3, 2])
 with col2:
+    st.image("logo_fis.jpg", width=150)
     st.markdown("<h1 style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
     pdf_container = st.container(height=350,border=True)
     
