@@ -182,6 +182,8 @@ for name in names:
 
 import streamlit as st
 
+import streamlit as st
+
 # Nastavení barev pro titulek pomocí CSS
 st.markdown(
     """
@@ -194,6 +196,10 @@ st.markdown(
         color: black;
         font-size: 2.5em;
     }
+    .right-align {
+        display: flex;
+        justify-content: flex-end;
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -203,8 +209,16 @@ st.markdown(
 st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
 
+# Zarovnání obrázku doprava
+st.markdown(
+    """
+    <div class="right-align">
+        <img src="logo_fis.jpg" width="150">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
-st.image("logo_fis.jpg", width=150)
 st.header("Chat with the AI")
 
 ###load model
