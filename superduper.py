@@ -180,13 +180,6 @@ st.sidebar.title("Documents")
 for name in names:
     st.sidebar.write(f"Title: {name}")
 
-import streamlit as st
-
-import streamlit as st
-
-# Nastavení barev pro titulek pomocí CSS
-import streamlit as st
-
 # Nastavení barev pro titulek pomocí CSS
 st.markdown(
     """
@@ -209,6 +202,10 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+# Použití barev pro titulek
+st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
+st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
+
 
 # Použití barev pro titulek a zarovnání obrázku doprava
 st.markdown(
