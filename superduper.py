@@ -218,7 +218,6 @@ chat_chain = LLMChain(llm=llm, prompt=prompt)
 if "mixtral_model" not in st.session_state:
     st.session_state["mixtral_model"] = llm
 
- Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
