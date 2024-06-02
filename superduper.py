@@ -246,9 +246,9 @@ with col2:
     
 
 with col1:
-    st.header("Chat with the AI")
     st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
     st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
+    st.header("Chat with the AI")
     chat_container = st.container()
     with chat_container:
         # Chat window
