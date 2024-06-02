@@ -220,7 +220,7 @@ for message in st.session_state.messages:
 
 col1, col2 = st.columns([3, 2])
 with col2:
-    st.header("Preview of the document")
+    st.markdown("<h1 style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
     pdf_container = st.container(height=350,border=True)
 with col1:
     chat_container = st.container()
