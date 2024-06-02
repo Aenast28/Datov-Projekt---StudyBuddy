@@ -215,7 +215,7 @@ st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class="right-align">
-        <img src="logo_fis.jpg" width="150">
+        <img src="logo_fis.jpg" width="50">
     </div>
     """,
     unsafe_allow_html=True
