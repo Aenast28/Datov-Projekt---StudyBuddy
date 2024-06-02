@@ -237,8 +237,8 @@ with col2:
     st.markdown("<style>div.stImage {display: flex; justify-content: flex-end;}</style>", unsafe_allow_html=True)
     #st.markdown("<h1 style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
     pdf_container = st.container(height=650, border=True)
-     with pdf_container:
-        st.markdown("<div style='border: 2px solid black; padding: 10px;'><h1 style='text-align: center;'>Preview of the document</h1></div>", unsafe_allow_html=True)
+         with pdf_container:
+            st.markdown("<div style='border: 2px solid black; padding: 10px;'><h1 style='text-align: center;'>Preview of the document</h1></div>", unsafe_allow_html=True)
 
 
 with col1:
