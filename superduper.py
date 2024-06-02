@@ -28,6 +28,7 @@ from unstructured.cleaners.core import clean
 from unstructured.documents.elements import Header, Footer
 import string
 from streamlit_pdf_viewer import pdf_viewer
+os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"]
 
 #### LOAD DOC ########################################
 ###################################################
@@ -256,6 +257,18 @@ col1, col2 = st.columns([3, 2])
 with col2:
     st.markdown("<h1 style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
     pdf_container = st.container(height=350,border=True)
+    
+# Použití barev pro titulek a zarovnání obrázku doprava
+st.markdown(
+    """
+    <div class="right-align">
+        <img src="logo_fis.jpg" width="150">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
 with col1:
     chat_container = st.container()
     with chat_container:
