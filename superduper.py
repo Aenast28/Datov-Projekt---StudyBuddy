@@ -202,6 +202,16 @@ st.markdown(
     unsafe_allow_html=True
 )
 # Použití barev pro titulek
+    # Použití barev pro titulek a zarovnání obrázku doprava
+st.markdown(
+        """
+        <div class="right-align">
+            <img src="logo_fis.jpg" width="150">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
 
@@ -247,16 +257,6 @@ with col2:
     st.markdown("<h1 style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
     pdf_container = st.container(height=350,border=True)
     
-    # Použití barev pro titulek a zarovnání obrázku doprava
-    st.markdown(
-        """
-        <div class="right-align">
-            <img src="logo_fis.jpg" width="150">
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
 
 with col1:
     chat_container = st.container()
