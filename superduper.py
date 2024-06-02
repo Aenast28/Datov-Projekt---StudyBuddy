@@ -232,10 +232,10 @@ col1, col2 = st.columns([3, 2])
 with col2:
     pdf_container = st.container(height=350,border=True)
 with col1:
+    st.header("Chat with the AI")
     chat_container = st.container()
     with chat_container:
         # Chat window
-        st.header("Chat with the AI")
         if prompt := st.chat_input("Jak mohu pomoci?"):
             # Add user message to chat history
             st.session_state.messages.append({"role": "user", "content": prompt})
@@ -251,7 +251,7 @@ if name_file:
         with open(name_file, "rb") as pdf_file:
             PDFbyte = pdf_file.read()
             with col2:
-                        
+                st.header("Preview of the document")
                 # Zobrazení PDF v kontejneru
                 with pdf_container:
                      pdf_viewer(PDFbyte)
