@@ -201,18 +201,14 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-# Použití barev pro titulek
-current_path = os.getcwd()
-image_path = os.path.join(current_path, "logo_fis.jpg")
-# Vytvoř HTML značku s obrázkem
-html_code = f"""
-    <div class="right-align">
-        <img src="file://{image_path}" width="150">
-    </div>
-"""
+image_path = "logo_fis.jpg"
 
-# Zobraz HTML značku
-st.markdown(html_code, unsafe_allow_html=True)
+
+# Nastavení CSS pro zarovnání obrázku doprava
+right_aligned_image = f'<div style="text-align:right"><img src="{image_path}"></div>'
+
+# Zobrazíme obrázek
+st.markdown(right_aligned_image, unsafe_allow_html=True)
 
 st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
