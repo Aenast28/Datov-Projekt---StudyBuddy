@@ -141,11 +141,11 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-#st.write(
-#    os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"],
-#)
+st.write("hello ppls",
+    os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"],
+)
 
-os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"]
+#os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"]
 
 embeddings = OpenAIEmbeddings()
 persist_directory = 'db'
