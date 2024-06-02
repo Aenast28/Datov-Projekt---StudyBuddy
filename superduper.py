@@ -194,33 +194,31 @@ st.markdown(
     .vse-ai {
         color: #00957d;
         font-size: 3em;
+        margin-bottom: 0;
     }
     .study-buddy {
         color: black;
         font-size: 2.5em;
+        margin-top: 0;
     }
-    .right-align img {
-        float: right;
+    .right-align {
+        display: flex;
+        justify-content: flex-end;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Použití barev pro titulek
-st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
-st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
-
-# Zarovnání obrázku doprava
+# Použití barev pro titulek a zarovnání obrázku doprava
 st.markdown(
     """
     <div class="right-align">
-        <img src="logo_fis.jpg" width="50">
+        <img src="logo_fis.jpg" width="150">
     </div>
     """,
     unsafe_allow_html=True
 )
-
 
 st.header("Chat with the AI")
 
