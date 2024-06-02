@@ -236,9 +236,8 @@ col1, col2 = st.columns([3, 2])
 with col2:
     st.image("logo_fis.jpg", width=135, output_format='auto')
     st.markdown("<style>div.stImage {display: flex; justify-content: flex-end;}</style>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
     pdf_container = st.container(height=650, border=True)
-    with pdf_container:
-        st.markdown("<div style='border: 2px solid black; padding: 10px;'><h1 style='text-align: center;'>Preview of the document</h1></div>", unsafe_allow_html=True)
 
 
 with col1:
@@ -267,10 +266,8 @@ if name_file:
         with open(name_file, "rb") as pdf_file:
             PDFbyte = pdf_file.read()
             with col2:
-                # Zobrazení PDF v kontejneru s rámečkem
+                # Zobrazení PDF v kontejneru
                 with pdf_container:
-                    st.markdown("<div style='border: 2px solid black; padding: 10px;'>", unsafe_allow_html=True)  # Začátek kontejneru s rámečkem
-                    pdf_viewer(PDFbyte)
-                    st.markdown("</div>", unsafe_allow_html=True)  # Konec kontejneru s rámečkem
+                     pdf_viewer(PDFbyte)
 
 
