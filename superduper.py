@@ -251,7 +251,6 @@ with col1:
         for message in st.session_state.messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
-        # Chat window
         if prompt := st.chat_input("Jak mohu pomoci?"):
             # Add user message to chat history
             st.session_state.messages.append({"role": "user", "content": prompt})
@@ -259,10 +258,10 @@ with col1:
             with st.chat_message("user"):
                 st.markdown(prompt)
             with st.chat_message("assistant"):
-                        response, name_file = generate_response(prompt)
-                        st.markdown(response)
-                    st.session_state.messages.append({"role": "assistant", "content": response})
-                        # Aktualizace tlačítka pro stahování s aktuálním souborem
+                response = generate_response(prompt)
+                st.markdown(response)
+            st.session_state.messages.append({"role": "assistant", "content": response})
+
 if name_file:
         with open(name_file, "rb") as pdf_file:
             PDFbyte = pdf_file.read()
