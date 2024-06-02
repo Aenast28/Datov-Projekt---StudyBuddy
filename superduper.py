@@ -239,6 +239,8 @@ for message in st.session_state.messages:
 #                        mime='application/octet-stream')
 # Vytvoření tří sloupců
 col1, col2, col3 = st.columns([1, 1, 1])
+with col3:
+    pdf_container = st.container(height=350,border=True)
 
 # Accept user input
 if prompt := st.chat_input("Jak mohu pomoci?"):
@@ -256,8 +258,6 @@ if prompt := st.chat_input("Jak mohu pomoci?"):
         with open(name_file, "rb") as pdf_file:
             PDFbyte = pdf_file.read()
             with col3:
-                # Vytvoření kontejneru pro zobrazení PDF
-                pdf_container = st.container(height=350,border=True)
                 
                 # Zobrazení PDF v kontejneru
                 with pdf_container:
