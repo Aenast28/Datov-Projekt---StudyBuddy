@@ -214,9 +214,6 @@ Question: {question}
 )
 chat_chain = LLMChain(llm=llm, prompt=prompt)
 
-# Chat window
-st.header("Chat with the AI")
-
 # Set a default model
 if "mixtral_model" not in st.session_state:
     st.session_state["mixtral_model"] = llm
@@ -231,19 +228,14 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 
-#with open(name_file, "rb") as pdf_file:
-#       PDFbyte = pdf_file.read()
-#st.download_button(label="Download last cited document",
-#                        data=PDFbyte,
-#                       file_name=name_file,
-#                        mime='application/octet-stream')
-# Vytvoření tří sloupců
 col1, col2 = st.columns([3, 2])
 with col2:
     pdf_container = st.container(height=350,border=True)
 with col1:
     chat_container = st.container()
     with chat_container:
+        # Chat window
+        st.header("Chat with the AI")
         if prompt := st.chat_input("Jak mohu pomoci?"):
             # Add user message to chat history
             st.session_state.messages.append({"role": "user", "content": prompt})
