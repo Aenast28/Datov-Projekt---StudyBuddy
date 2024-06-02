@@ -204,8 +204,6 @@ st.markdown(
 
 
 
-st.header("Chat with the AI")
-
 ###load model
 llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1",deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
 llm.model_kwargs = {
@@ -248,6 +246,7 @@ with col2:
     
 
 with col1:
+    st.header("Chat with the AI")
     st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
     st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
     chat_container = st.container()
