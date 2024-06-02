@@ -236,7 +236,7 @@ with col2:
     st.image("logo_fis.jpg", width=135, output_format='auto')
     st.markdown("<style>div.stImage {display: flex; justify-content: flex-end;}</style>", unsafe_allow_html=True)
     st.markdown("<h1 style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
-    pdf_container = st.container(height=625, border=True)
+    pdf_container = st.container(height=650, border=True)
 
 
 
