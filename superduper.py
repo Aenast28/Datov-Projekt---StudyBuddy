@@ -124,7 +124,7 @@ def generate_response(query):
     chat_history.append(f"User: {query}")
     chat_history.append(f"Assistant: {response['text']}")
     
-    return response["text"], name_file
+    return response
 
 
 
