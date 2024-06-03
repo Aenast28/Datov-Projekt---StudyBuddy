@@ -197,13 +197,12 @@ prompt = PromptTemplate(
     2. Respond in the language in which the question is asked. If the language is not specified, respond in Czech.
     3. Use information only from the provided context. If the requested information is not in the context, politely state that you do not know.
     4. At the end, include information about the source of the information, chapter, and page from which you drew.
-    
-    Additional Commands:
-    - Provide examples or explanations to clarify complex concepts.
-    - Offer step-by-step solutions to problems when applicable.
-    - Suggest additional resources or readings if relevant and available in the context.
-    - Use bullet points or numbered lists for clarity when appropriate.
-    - Ensure responses are concise and to the point, avoiding unnecessary elaboration.
+    5. Always adhere to the maximum token length limit.
+    6. Provide examples or explanations to clarify complex concepts.
+    7. Offer step-by-step solutions to problems when applicable.
+    8. Suggest additional resources or readings if relevant and available in the context.
+    9. Use bullet points or numbered lists for clarity when appropriate.
+    10. Ensure responses are concise and to the point, avoiding unnecessary elaboration.
 Context: {context}
 Question: {question}
 """,
