@@ -124,7 +124,7 @@ def generate_response(query):
     chat_history.append(f"User: {query}")
     chat_history.append(f"Assistant: {response['text']}")
     
-    return response["text"], name_file
+    return response["text"], name_file, chat_history
 
 
 
@@ -264,7 +264,7 @@ with col1:
             with st.chat_message("user"):
                 st.markdown(prompt)
             with st.chat_message("assistant"):
-                response, name_file = generate_response(prompt)
+                response, name_file, chat_history = generate_response(prompt)
                 st.markdown(response)
             st.session_state.messages.append({"role": "assistant", "content": response})
 
