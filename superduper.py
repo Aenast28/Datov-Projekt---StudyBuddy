@@ -186,7 +186,7 @@ llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1",deepinfra_api_t
 llm.model_kwargs = {
     "temperature": 0.4,
     "repetition_penalty": 1.2,
-    "max_new_tokens": 350,
+    "max_new_tokens": 500,
     "top_p": 0.9,
 }
 
