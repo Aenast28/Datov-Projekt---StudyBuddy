@@ -234,16 +234,19 @@ st.markdown(
         display: flex;
         justify-content: flex-end;
     }
+    .preview-header {
+        margin-top: -2.5em; /* Negative margin to move it higher */
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-col1, col2 = st.columns([3, 2])
+col1, col2 = st.columns([3, 2], gap="small")
 
 with col2:
-    st.markdown("<img src='https://fis.vse.cz/wp-content/uploads/FIS_loga_FIS_CZ_2_FIS_CZ_kruhove_RGB_pro_obrazovku_FIS_2_logo_2_rgb_1772x1772_acf_cropped.jpg' width='170' style='float:right;'>", unsafe_allow_html=True)
-    st.markdown("<h1 style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
+    st.markdown("<img src='https://fis.vse.cz/wp-content/uploads/FIS_loga_FIS_CZ_2_FIS_CZ_kruhove_RGB_pro_obrazovku_FIS_2_logo_2_rgb_1772x1772_acf_cropped.jpg' width='150' style='float:right;'>", unsafe_allow_html=True)
+    st.markdown("<h1 class='preview-header' style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
     pdf_container = st.container(height=650, border=True)
 
 
