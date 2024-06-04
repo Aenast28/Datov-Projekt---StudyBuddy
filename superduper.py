@@ -234,6 +234,9 @@ st.markdown(
         display: flex;
         justify-content: flex-end;
     }
+    .logo {
+        margin-top: -2em; /* Negative margin to move it higher */
+    }
     .preview-header {
         margin-top: -1em; /* Negative margin to move it higher */
     }
