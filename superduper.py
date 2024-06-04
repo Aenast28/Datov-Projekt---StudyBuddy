@@ -235,7 +235,7 @@ st.markdown(
         justify-content: flex-end;
     }
     .preview-header {
-        margin-top: -1em; /* Negative margin to move it higher */
+        margin-top: -0.5em; /* Negative margin to move it higher */
     }
     .logo {
         margin-top: -1em; /* Negative margin to move it higher */
@@ -246,11 +246,33 @@ st.markdown(
         border: 1px solid #ccc; /* Optional: Add a border for better visualization */
         padding: 10px; /* Optional: Add padding for better visualization */
     }
-    .resize {
+    .resizable {
+        display: flex;
+        overflow: hidden;
+    }
+    .resizable > div {
         resize: horizontal;
         overflow: auto;
+        border: 1px solid #ccc; /* Optional: for better visualization */
     }
     </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# JavaScript for column resizing
+st.markdown(
+    """
+    <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const col1 = document.querySelector('div[data-testid="stHorizontalBlock"] > div:first-child');
+        const col2 = document.querySelector('div[data-testid="stHorizontalBlock"] > div:last-child');
+        col1.style.flex = '1 1 auto';
+        col2.style.flex = '1 1 auto';
+        col1.style.resize = 'horizontal';
+        col2.style.resize = 'horizontal';
+    });
+    </script>
     """,
     unsafe_allow_html=True
 )
@@ -269,13 +291,16 @@ with col1:
     st.markdown("<h1 style='text-align: left;'>Chat with the AI</h1>", unsafe_allow_html=True)
     
     # Container for the chat messages
-    st.markdown('<div class="chat-container">', unsafe_allow_html=True)
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-    st.markdown('</div>', unsafe_allow_html=True)
+    chat_container = st.container()
+    with chat_container:
+        if "messages" not in st.session_state:
+            st.session_state.messages = []
+        for message in st.session_state.messages:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+
+    # Spacing to push the input to the bottom
+    st.write('<div style="flex-grow: 1;"></div>', unsafe_allow_html=True)
     
     # Input field at the bottom
     if prompt := st.chat_input("Jak mohu pomoci?"):
@@ -297,20 +322,3 @@ if name_file:
                 # Zobrazení PDF v kontejneru
                 with pdf_container:
                     pdf_viewer(PDFbyte)
-
-# JavaScript for column resizing
-st.markdown(
-    """
-    <script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-        const col1 = document.querySelector('div[data-testid="column"]:nth-child(1)');
-        const col2 = document.querySelector('div[data-testid="column"]:nth-child(2)');
-        col1.style.flex = '1 1 auto';
-        col2.style.flex = '1 1 auto';
-        col1.style.resize = 'horizontal';
-        col2.style.resize = 'horizontal';
-    });
-    </script>
-    """,
-    unsafe_allow_html=True
-)
