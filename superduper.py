@@ -301,3 +301,19 @@ if name_file:
                 with pdf_container:
                     pdf_viewer(PDFbyte)
 
+st.markdown(
+    """
+    <script>
+    function resize() {
+        const col1 = document.querySelector('.stColumn:nth-child(1)');
+        const col2 = document.querySelector('.stColumn:nth-child(2)');
+        col1.style.flex = '1 1 0';
+        col2.style.flex = '1 1 0';
+        col1.style.resize = 'horizontal';
+        col2.style.resize = 'horizontal';
+    }
+    window.addEventListener('load', resize);
+    </script>
+    """,
+    unsafe_allow_html=True
+)
