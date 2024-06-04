@@ -246,15 +246,6 @@ with col2:
     pdf_container = st.container(height=650, border=True)
 
 
-import streamlit as st
-
-def generate_response(prompt):
-    # Mock implementation of generating response
-    response = f"AI response to: {prompt}"
-    name_file = "example.txt"
-    chat_history = []
-    return response, name_file, chat_history
-
 with col1:
     st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
     st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
