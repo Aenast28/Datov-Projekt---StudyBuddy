@@ -235,7 +235,7 @@ st.markdown(
         justify-content: flex-end;
     }
     .preview-header {
-        margin-top: -2.5em; /* Negative margin to move it higher */
+        margin-top: -1em; /* Negative margin to move it higher */
     }
     </style>
     """,
