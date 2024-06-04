@@ -243,6 +243,8 @@ st.markdown(
     .chat-container {
         height: 650px;
         overflow-y: auto;
+        border: 1px solid #ccc; /* Optional: Add a border for better visualization */
+        padding: 10px; /* Optional: Add padding for better visualization */
     }
     .resize {
         resize: horizontal;
@@ -267,18 +269,13 @@ with col1:
     st.markdown("<h1 style='text-align: left;'>Chat with the AI</h1>", unsafe_allow_html=True)
     
     # Container for the chat messages
-    chat_container = st.container()
     st.markdown('<div class="chat-container">', unsafe_allow_html=True)
-    with chat_container:
-        if "messages" not in st.session_state:
-            st.session_state.messages = []
-        for message in st.session_state.messages:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
     st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Spacing to push the input to the bottom
-    st.write('<div style="flex-grow: 1;"></div>', unsafe_allow_html=True)
     
     # Input field at the bottom
     if prompt := st.chat_input("Jak mohu pomoci?"):
@@ -301,18 +298,18 @@ if name_file:
                 with pdf_container:
                     pdf_viewer(PDFbyte)
 
+# JavaScript for column resizing
 st.markdown(
     """
     <script>
-    function resize() {
-        const col1 = document.querySelector('.stColumn:nth-child(1)');
-        const col2 = document.querySelector('.stColumn:nth-child(2)');
-        col1.style.flex = '1 1 0';
-        col2.style.flex = '1 1 0';
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const col1 = document.querySelector('div[data-testid="column"]:nth-child(1)');
+        const col2 = document.querySelector('div[data-testid="column"]:nth-child(2)');
+        col1.style.flex = '1 1 auto';
+        col2.style.flex = '1 1 auto';
         col1.style.resize = 'horizontal';
         col2.style.resize = 'horizontal';
-    }
-    window.addEventListener('load', resize);
+    });
     </script>
     """,
     unsafe_allow_html=True
