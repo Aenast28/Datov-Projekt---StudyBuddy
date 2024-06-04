@@ -240,6 +240,14 @@ st.markdown(
     .logo {
         margin-top: -2.5em; /* Negative margin to move it higher */
     }
+    .chat-container {
+        height: 650px;
+        overflow-y: auto;
+    }
+    .resize {
+        resize: horizontal;
+        overflow: auto;
+    }
     </style>
     """,
     unsafe_allow_html=True
