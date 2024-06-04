@@ -238,7 +238,7 @@ st.markdown(
         margin-top: -1em; /* Negative margin to move it higher */
     }
     .logo {
-        margin-top: -2.5em; /* Negative margin to move it higher */
+        margin-top: -1em; /* Negative margin to move it higher */
     }
     .chat-container {
         height: 650px;
@@ -268,12 +268,14 @@ with col1:
     
     # Container for the chat messages
     chat_container = st.container()
+    st.markdown('<div class="chat-container">', unsafe_allow_html=True)
     with chat_container:
         if "messages" not in st.session_state:
             st.session_state.messages = []
         for message in st.session_state.messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
+    st.markdown('</div>', unsafe_allow_html=True)
     
     # Spacing to push the input to the bottom
     st.write('<div style="flex-grow: 1;"></div>', unsafe_allow_html=True)
