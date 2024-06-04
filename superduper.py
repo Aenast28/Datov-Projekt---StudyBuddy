@@ -254,6 +254,8 @@ st.markdown(
         resize: horizontal;
         overflow: auto;
         border: 1px solid #ccc; /* Optional: for better visualization */
+        padding: 10px;
+        flex: 1 1 auto;
     }
     </style>
     """,
@@ -265,8 +267,8 @@ st.markdown(
     """
     <script>
     window.addEventListener('DOMContentLoaded', (event) => {
-        const col1 = document.querySelector('div[data-testid="stHorizontalBlock"] > div:first-child');
-        const col2 = document.querySelector('div[data-testid="stHorizontalBlock"] > div:last-child');
+        const col1 = document.querySelectorAll('section.main > div.block-container > div:nth-child(2) > div')[0];
+        const col2 = document.querySelectorAll('section.main > div.block-container > div:nth-child(2) > div')[1];
         col1.style.flex = '1 1 auto';
         col2.style.flex = '1 1 auto';
         col1.style.resize = 'horizontal';
