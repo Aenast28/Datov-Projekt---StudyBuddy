@@ -281,13 +281,9 @@ with col1:
             st.session_state.messages.append({"role": "assistant", "content": response})
 
 if "name_file" in locals() and name_file:
-    with open(name_file, "rb") as pdf_file:
-        PDFbyte = pdf_file.read()
-        with pdf_container:
-            st.download_button(
-                label="Download PDF",
-                data=PDFbyte,
-                file_name="document.pdf",
-                mime="application/pdf"
-            )
-            st.pdf(PDFbyte)
+        with open(name_file, "rb") as pdf_file:
+            PDFbyte = pdf_file.read()
+            with col2:
+                # Zobrazení PDF v kontejneru
+                with pdf_container:
+                    pdf_viewer(PDFbyte)
