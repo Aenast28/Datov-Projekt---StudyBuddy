@@ -71,9 +71,11 @@ def similarity_search(query):
     if selected_languages:
         adjusted_filters.append({'Language': {'$in': selected_languages}})
     
-    # Combine filters using '$and' to apply all conditions if there are any filters
-    if adjusted_filters:
+    # Combine filters using '$and' to apply all conditions if there are multiple filters
+    if len(adjusted_filters) > 1:
         filter_query = {'$and': adjusted_filters}
+    elif len(adjusted_filters) == 1:
+        filter_query = adjusted_filters[0]  # Use the single filter directly
     else:
         filter_query = {}  # No filters, match all documents
     
