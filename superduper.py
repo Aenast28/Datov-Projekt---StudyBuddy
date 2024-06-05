@@ -58,33 +58,29 @@ for pdf_file in pdf_files:
 def similarity_search(query):
     adjusted_filters = []
 
-    # Add filters based on selections or include all if none are selected
+    # Add filters based on selections
     if selected_idents:
         adjusted_filters.append({'Ident': {'$in': selected_idents}})
-    else:
-        adjusted_filters.append({'Ident': {'$exists': True}})
     
     if selected_names:
         adjusted_filters.append({'Name': {'$in': selected_names}})
-    else:
-        adjusted_filters.append({'Name': {'$exists': True}})
     
     if selected_years:
         adjusted_filters.append({'Year': {'$in': selected_years}})
-    else:
-        adjusted_filters.append({'Year': {'$exists': True}})
     
     if selected_languages:
         adjusted_filters.append({'Language': {'$in': selected_languages}})
-    else:
-        adjusted_filters.append({'Language': {'$exists': True}})
     
-    # Combine filters using '$and' to apply all conditions
-    filter_query = {'$and': adjusted_filters}
-
+    # Combine filters using '$and' to apply all conditions if there are any filters
+    if adjusted_filters:
+        filter_query = {'$and': adjusted_filters}
+    else:
+        filter_query = {}  # No filters, match all documents
+    
     # Perform the similarity search with the adjusted filters
     # Assuming openai_lc_client5 is defined and configured correctly
     return openai_lc_client5.similarity_search(query, filter=filter_query)
+
 
 
 # Function to generate response using similarity search and chat completion
