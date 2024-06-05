@@ -9,9 +9,8 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
 from typing import List, Dict
 from openai import OpenAI
-import chromadb  # Assuming chromadb is a hypothetical module for this example
+import chromadb
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.chains import LLMChain
 from langchain.prompts.prompt import PromptTemplate
@@ -22,9 +21,6 @@ from langchain_openai import OpenAIEmbeddings
 import chromadb
 import re
 import PyPDF2
-from unstructured.chunking.title import chunk_by_title
-from unstructured.partition.auto import partition
-from unstructured.cleaners.core import clean
 from unstructured.documents.elements import Header, Footer
 import string
 from streamlit_pdf_viewer import pdf_viewer
@@ -60,9 +56,17 @@ for pdf_file in pdf_files:
 #############################
 # Assume you have a similarity search function defined, which searches documents based on a query
 def similarity_search(query):
-    # This is a placeholder for your similarity search function.
-    # Replace it with the actual implementation.
-    return openai_lc_client5.similarity_search(query)
+    # similarity search with metadata filters
+    return openai_lc_client5.similarity_search(query, 
+                                               filter = {
+                                                   '$and':[
+                                                       {'Ident': {'$in': selected_idents}},
+                                                       {'Name': {'$in': selected_names}},
+                                                       {'Year': {'$in': selected_years}},
+                                                       {'Language': {'$in': selected_languages}}
+                                                   ]
+                                               }
+                                              )
 
 # Function to generate response using similarity search and chat completion
 chat_history=[]
@@ -177,7 +181,7 @@ selected_languages = st.sidebar.multiselect("Filter by Language", languages)
 st.sidebar.title("Documents")
 # Iterate over the unique names and write them to the sidebar
 for name in names:
-    st.sidebar.write(f"Title: {name}")
+    st.sidebar.write(f"{name}")
 
 
 
