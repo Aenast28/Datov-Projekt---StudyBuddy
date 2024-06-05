@@ -56,17 +56,36 @@ for pdf_file in pdf_files:
 #############################
 # Assume you have a similarity search function defined, which searches documents based on a query
 def similarity_search(query):
-    # similarity search with metadata filters
+    # Check if each filter is empty and adjust the filter condition accordingly
+    adjusted_filters = []
+    
+    if selected_idents:
+        adjusted_filters.append({'Ident': {'$in': selected_idents}})
+    else:
+        # When no idents are selected, include all idents
+        adjusted_filters.append({'Ident': {'$exists': True}})
+    
+    if selected_names:
+        adjusted_filters.append({'Name': {'$in': selected_names}})
+    else:
+        # When no names are selected, include all names
+        adjusted_filters.append({'Name': {'$exists': True}})
+    
+    if selected_years:
+        adjusted_filters.append({'Year': {'$in': selected_years}})
+    else:
+        # When no years are selected, include all years
+        adjusted_filters.append({'Year': {'$exists': True}})
+    
+    if selected_languages:
+        adjusted_filters.append({'Language': {'$in': selected_languages}})
+    else:
+        # When no languages are selected, include all languages
+        adjusted_filters.append({'Language': {'$exists': True}})
+    
+    # Perform the similarity search with the adjusted filters
     return openai_lc_client5.similarity_search(query, 
-                                               filter = {
-                                                   '$and':[
-                                                       {'Ident': {'$in': selected_idents}},
-                                                       {'Name': {'$in': selected_names}},
-                                                       {'Year': {'$in': selected_years}},
-                                                       {'Language': {'$in': selected_languages}}
-                                                   ]
-                                               }
-                                              )
+                                               filter = {'$and': adjusted_filters})
 
 # Function to generate response using similarity search and chat completion
 chat_history=[]
