@@ -56,8 +56,36 @@ for pdf_file in pdf_files:
 #############################
 # Assume you have a similarity search function defined, which searches documents based on a query
 def similarity_search(query):
-    # Check if each filter is empty and adjust the filter condition accordingly
-    return openai_lc_client5.similarity_search(query)
+    adjusted_filters = []
+    
+    if selected_idents:
+        adjusted_filters.append({'Ident': {'$in': selected_idents}})
+    else:
+        # When no idents are selected, include all idents
+        adjusted_filters.append({'Ident': {'$exists': True}})
+    
+    if selected_names:
+        adjusted_filters.append({'Name': {'$in': selected_names}})
+    else:
+        # When no names are selected, include all names
+        adjusted_filters.append({'Name': {'$exists': True}})
+    
+    if selected_years:
+        adjusted_filters.append({'Year': {'$in': selected_years}})
+    else:
+        # When no years are selected, include all years
+        adjusted_filters.append({'Year': {'$exists': True}})
+    
+    if selected_languages:
+        adjusted_filters.append({'Language': {'$in': selected_languages}})
+    else:
+        # When no languages are selected, include all languages
+        adjusted_filters.append({'Language': {'$exists': True}})
+    
+    # Perform the similarity search with the adjusted filters
+    return openai_lc_client5.similarity_search(query, 
+                                               filter = {'$or': adjusted_filters})
+
 
 # Function to generate response using similarity search and chat completion
 chat_history=[]
@@ -119,7 +147,7 @@ def generate_response(query):
     chat_history.append(f"User: {query}")
     chat_history.append(f"Assistant: {response['text']}")
     
-    return top_documents#respons["text"], name_file, chat_history
+    return response["text"], name_file, chat_history
 
 
 
@@ -308,7 +336,7 @@ with col1:
             st.markdown(prompt)
         # Generate and display AI response
         with st.chat_message("assistant"):
-            response = generate_response(prompt)#, name_file, chat_history 
+            response, name_file, chat_history = generate_response(prompt)
             st.markdown(response)
         st.session_state.messages.append({"role": "assistant", "content": response})
 
