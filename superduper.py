@@ -60,31 +60,25 @@ def similarity_search(query):
     
     if selected_idents:
         adjusted_filters.append({'Ident': {'$in': selected_idents}})
-    else:
-        # When no idents are selected, include all idents
-        adjusted_filters.append({'Ident': {'$exists': True}})
     
     if selected_names:
         adjusted_filters.append({'Name': {'$in': selected_names}})
-    else:
-        # When no names are selected, include all names
-        adjusted_filters.append({'Name': {'$exists': True}})
     
     if selected_years:
         adjusted_filters.append({'Year': {'$in': selected_years}})
-    else:
-        # When no years are selected, include all years
-        adjusted_filters.append({'Year': {'$exists': True}})
     
     if selected_languages:
         adjusted_filters.append({'Language': {'$in': selected_languages}})
-    else:
-        # When no languages are selected, include all languages
-        adjusted_filters.append({'Language': {'$exists': True}})
     
+    # If no filters are selected, include all documents
+    if not adjusted_filters:
+        filter_query = {}
+    else:
+        filter_query = {'$and': adjusted_filters}
+
     # Perform the similarity search with the adjusted filters
-    return openai_lc_client5.similarity_search(query, 
-                                               filter = {'$or': adjusted_filters})
+    # Assuming openai_lc_client5 is defined and configured correctly
+    return openai_lc_client5.similarity_search(query, filter=filter_query)
 
 
 # Function to generate response using similarity search and chat completion
