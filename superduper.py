@@ -319,7 +319,6 @@ with col1:
         for message in st.session_state.messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
-        st.write('<div style="flex-grow: 1;"></div>', unsafe_allow_html=True)
 
     # Spacer to push the input to the bottom
     st.write('<div style="flex-grow: 1;"></div>', unsafe_allow_html=True)
@@ -329,13 +328,14 @@ with col1:
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
         # Display user message in chat message container
-        with st.chat_message("user"):
-            st.markdown(prompt)
-        # Generate and display AI response
-        response, name_file, chat_history = generate_response(prompt)
-        st.session_state.messages.append({"role": "assistant", "content": response})
-        with st.chat_message("assistant"):
-            st.markdown(response)
+        with chat_container:
+            with st.chat_message("user"):
+                st.markdown(prompt)
+            # Generate and display AI response
+            response, name_file, chat_history = generate_response(prompt)
+            st.session_state.messages.append({"role": "assistant", "content": response})
+            with st.chat_message("assistant"):
+                st.markdown(response)
 
 if name_file:
         with open(name_file, "rb") as pdf_file:
