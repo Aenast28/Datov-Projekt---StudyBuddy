@@ -306,14 +306,13 @@ with col2:
     st.markdown("<h1 class='preview-header' style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
     pdf_container = st.container(height=650, border=True)
 
-
 with col1:
     st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
     st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
     st.markdown("<h1 style='text-align: left;'>Chat with the AI</h1>", unsafe_allow_html=True)
     
     # Container for the chat messages
-    chat_container = st.container(height=650,border=True)
+    chat_container = st.container(height=650, border=True)
     with chat_container:
         if "messages" not in st.session_state:
             st.session_state.messages = []
@@ -321,17 +320,19 @@ with col1:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
         st.write('<div style="flex-grow: 1;"></div>', unsafe_allow_html=True)
-        if prompt := st.chat_input("Jak mohu pomoci?"):
-            # Add user message to chat history
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            # Display user message in chat message container
-            with st.chat_message("user"):
-                st.markdown(prompt)
-            # Generate and display AI response
-            with st.chat_message("assistant"):
-                response, name_file, chat_history = generate_response(prompt)
-                st.markdown(response)
-            st.session_state.messages.append({"role": "assistant", "content": response})
+
+    # Chat input outside of chat_container
+    if prompt := st.chat_input("Jak mohu pomoci?"):
+        # Add user message to chat history
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        # Display user message in chat message container
+        with st.chat_message("user"):
+            st.markdown(prompt)
+        # Generate and display AI response
+        with st.chat_message("assistant"):
+            response, name_file, chat_history = generate_response(prompt)
+            st.markdown(response)
+        st.session_state.messages.append({"role": "assistant", "content": response})
 
 if name_file:
         with open(name_file, "rb") as pdf_file:
