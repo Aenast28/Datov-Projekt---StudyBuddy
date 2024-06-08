@@ -107,7 +107,7 @@ def generate_response(query):
     global name_file  # Deklarace globální proměnné name_file
     # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
-    top_documents = docs[:3]  # Select the top three documents
+    top_documents = docs[0]  # Select the top three documents
     top_documents1 = str(top_documents)  # Převést vstup na řetězec
     
     # Clear the current string in name_file
