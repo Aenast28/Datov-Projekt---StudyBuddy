@@ -256,7 +256,7 @@ st.markdown(
         justify-content: flex-end;
     }
     .preview-header {
-        margin-top: -1.5em; /* Negative margin to move it higher */
+        margin-top: -1.6em; /* Negative margin to move it higher */
     }
     .logo {
         margin-top: -3em; /* Negative margin to move it higher */
