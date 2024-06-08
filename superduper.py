@@ -324,7 +324,7 @@ with col1:
     st.write('<div style="flex-grow: 1;"></div>', unsafe_allow_html=True)
     
     # Chat input at the bottom of col1
-    if prompt := st.chat_input("Ask your studdy buddy"):
+    if prompt := st.chat_input("Ask your study buddy"):
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
         # Display user message in chat message container
