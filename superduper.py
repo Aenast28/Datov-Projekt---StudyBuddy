@@ -184,7 +184,7 @@ languages = list(set(languages))
 
 #os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"]
 
-embeddings = OpenAIEmbeddings()
+#embeddings = OpenAIEmbeddings()
 persist_directory = 'db'
 openai_lc_client5 = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
 
@@ -221,13 +221,13 @@ for name in names:
 
 
 ###load model
-llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1",deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
-llm.model_kwargs = {
-    "temperature": 0.4,
-    "repetition_penalty": 1.2,
-    "max_new_tokens": 500,
-    "top_p": 0.90,
-}
+#llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1",deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
+#llm.model_kwargs = {
+#    "temperature": 0.4,
+#    "repetition_penalty": 1.2,
+#    "max_new_tokens": 500,
+#    "top_p": 0.90,
+#}
 
 prompt = PromptTemplate(
     template="""
