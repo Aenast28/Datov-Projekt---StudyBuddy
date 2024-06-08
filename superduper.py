@@ -248,7 +248,7 @@ st.markdown(
     .study-buddy {
         color: black;
         font-size: 2em; /* Adjusted font size */
-        margin-top: -2.5em; /* Negative margin to move it higher */
+        margin-top: -2em; /* Negative margin to move it higher */
         margin-bottom: 0.2em; /* Reduced margin */
     }
     .right-align {
@@ -256,7 +256,7 @@ st.markdown(
         justify-content: flex-end;
     }
     .preview-header {
-        margin-top: -2.5em; /* Negative margin to move it higher */
+        margin-top: -1.5em; /* Negative margin to move it higher */
     }
     .logo {
         margin-top: -3em; /* Negative margin to move it higher */
