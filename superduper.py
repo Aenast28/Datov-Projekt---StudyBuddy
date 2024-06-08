@@ -332,10 +332,10 @@ with col1:
         with st.chat_message("user"):
             st.markdown(prompt)
         # Generate and display AI response
-        with st.chat_message("assistant"):
-            response, name_file, chat_history = generate_response(prompt)
-            st.markdown(response)
+        response, name_file, chat_history = generate_response(prompt)
         st.session_state.messages.append({"role": "assistant", "content": response})
+        with st.chat_message("assistant"):
+            st.markdown(response)
 
 if name_file:
         with open(name_file, "rb") as pdf_file:
