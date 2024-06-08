@@ -299,13 +299,13 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 col1, col2 = st.columns([3, 2], gap="small")
 
 with col2:
     st.markdown("<img class='logo' src='https://fis.vse.cz/wp-content/uploads/FIS_loga_FIS_CZ_2_FIS_CZ_kruhove_RGB_pro_obrazovku_FIS_2_logo_2_rgb_1772x1772_acf_cropped.jpg' width='150' style='float:right;'>", unsafe_allow_html=True)
     st.markdown("<h1 class='preview-header' style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
-    pdf_container = st.container()
+    pdf_container = st.container(height=650, border=True)
+
 
 with col1:
     st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
@@ -313,19 +313,14 @@ with col1:
     st.markdown("<h1 style='text-align: left;'>Chat with the AI</h1>", unsafe_allow_html=True)
     
     # Container for the chat messages
-    chat_container = st.container()
+    chat_container = st.container(height=650,border=True)
     with chat_container:
-        st.markdown('<div class="chat-container">', unsafe_allow_html=True)
-        
-        st.markdown('<div class="chat-messages">', unsafe_allow_html=True)
         if "messages" not in st.session_state:
             st.session_state.messages = []
         for message in st.session_state.messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
-        st.markdown('</div>', unsafe_allow_html=True)
-
-        st.markdown('<div class="chat-input">', unsafe_allow_html=True)
+        st.write('<div style="flex-grow: 1;"></div>', unsafe_allow_html=True)
         if prompt := st.chat_input("Jak mohu pomoci?"):
             # Add user message to chat history
             st.session_state.messages.append({"role": "user", "content": prompt})
@@ -337,14 +332,11 @@ with col1:
                 response, name_file, chat_history = generate_response(prompt)
                 st.markdown(response)
             st.session_state.messages.append({"role": "assistant", "content": response})
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-        st.markdown('</div>', unsafe_allow_html=True)
 
 if name_file:
-    with open(name_file, "rb") as pdf_file:
-        PDFbyte = pdf_file.read()
-        with col2:
-            # Zobrazení PDF v kontejneru
-            with pdf_container:
-                pdf_viewer(PDFbyte)
+        with open(name_file, "rb") as pdf_file:
+            PDFbyte = pdf_file.read()
+            with col2:
+                # Zobrazení PDF v kontejneru
+                with pdf_container:
+                    pdf_viewer(PDFbyte)
