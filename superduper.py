@@ -142,10 +142,10 @@ def generate_response(query):
     )
     
     # Store the query and response in chat history
-    chat_history.append(f"Previous Question: {query}")
-    chat_history.append(f"Previous Answer: {response['text']}")
+    chat_history.append(query)
+    chat_history.append(response["text"])
     
-    return response["text"], name_file, full_context
+    return response["text"], name_file, chat_history
 
 
 
