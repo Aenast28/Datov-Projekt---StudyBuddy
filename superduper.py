@@ -86,7 +86,7 @@ def similarity_search(query):
 
 
 # Function to generate response using similarity search and chat completion
-chat_history=[]
+chat_history=["Huh cat"]
 import re
 
 # Definice proměnné name_file
