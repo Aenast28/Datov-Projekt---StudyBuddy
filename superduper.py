@@ -205,10 +205,10 @@ for name in names:
 ###load model
 llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1",deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
 llm.model_kwargs = {
-    "temperature": 0.4,
+    "temperature": 0.6,
     "repetition_penalty": 1.2,
     "max_new_tokens": 500,
-    "top_p": 0.9,
+    "top_p": 0.85,
 }
 
 prompt = PromptTemplate(
