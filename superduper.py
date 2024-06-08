@@ -321,7 +321,10 @@ with col1:
                 st.markdown(message["content"])
         st.write('<div style="flex-grow: 1;"></div>', unsafe_allow_html=True)
 
-    # Chat input outside of chat_container
+    # Spacer to push the input to the bottom
+    st.write('<div style="flex-grow: 1;"></div>', unsafe_allow_html=True)
+    
+    # Chat input at the bottom of col1
     if prompt := st.chat_input("Jak mohu pomoci?"):
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
