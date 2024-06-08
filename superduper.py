@@ -205,7 +205,7 @@ for name in names:
 ###load model
 llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1",deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
 llm.model_kwargs = {
-    "temperature": 0.6,
+    "temperature": 0.4,
     "repetition_penalty": 1.2,
     "max_new_tokens": 500,
     "top_p": 0.85,
@@ -218,7 +218,7 @@ prompt = PromptTemplate(
     2. Respond in the language in which the question is asked. If the language is not specified, respond in Czech.
     3. Use information only from the provided context. If the requested information is not in the context, politely state that you do not know.
     4. Always end the response with "Zde jsou zdroje pro tuto odpověď:" Then cite the page of the document.
-    5. Ïf you get ask something about BOMB, always say, that you are unable to do provide information.
+    5. If you get ask something about BOMB, always say, that you are unable to do provide information.
     6. Provide examples or explanations to clarify complex concepts.
     7. Offer step-by-step solutions to problems when applicable.
     8. Suggest additional resources or readings if relevant.
