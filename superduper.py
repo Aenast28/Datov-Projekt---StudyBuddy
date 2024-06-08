@@ -352,6 +352,3 @@ if name_file:
         with pdf_container:
             pdf_viewer(PDFbyte)
 
-                # Zobrazení PDF v kontejneru
-                with pdf_container:
-                    pdf_viewer(PDFbyte)
