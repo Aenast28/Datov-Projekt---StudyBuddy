@@ -188,8 +188,8 @@ languages = list(set(languages))
 #os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"]
 
 #embeddings = OpenAIEmbeddings()
-persist_directory = 'db'
-openai_lc_client5 = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
+#persist_directory = 'db'
+#openai_lc_client5 = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
 
 st.markdown(
     """
