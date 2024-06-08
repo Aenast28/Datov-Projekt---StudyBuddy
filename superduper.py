@@ -47,8 +47,11 @@ def load_llm():
         "top_p": 0.90,
     }
     return llm
-
+@st.cache_resource
+def load_vectorstore(_embeddings):
+    return Chroma(persist_directory='db', embedding_function=_embeddings)
 embeddings = load_embeddings()
+openai_lc_client5 = load_vectorstore(embeddings)
 llm = load_llm()
 
 #### LOAD DOC ########################################
