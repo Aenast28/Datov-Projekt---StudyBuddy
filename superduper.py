@@ -330,14 +330,8 @@ with col1:
         with chat_container:
             with st.chat_message("user"):
                 st.markdown(prompt)
-                # Generate and display AI response
-                response, name_file, new_chat_history = generate_response(prompt, chat_history)
-                
-                # Update chat history
-                chat_history.extend(new_chat_history)
-                
-                # Display updated chat history
-                st.markdown("\n".join(chat_history))
+            # Generate and display AI response
+            response, name_file, chat_history = generate_response(prompt)
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
                 st.markdown(response)
