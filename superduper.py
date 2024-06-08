@@ -150,6 +150,8 @@ def similarity_search(query):
 
 # Function to generate response using similarity search and chat completion
 chat_history = []
+name_file ="" 
+
 import re
 
 def generate_response(query):
