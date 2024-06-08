@@ -24,6 +24,13 @@ import PyPDF2
 from unstructured.documents.elements import Header, Footer
 import string
 from streamlit_pdf_viewer import pdf_viewer
+# Streamlit app layout with theme
+st.set_page_config(
+    page_title="VŠE AI Study Buddy",
+    page_icon=":robot_face:",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 @st.cache_resource
 def load_embeddings():
@@ -173,14 +180,6 @@ idents = list(set(idents))
 names = list(set(names))
 years = list(set(years))
 languages = list(set(languages))
-
-# Streamlit app layout with theme
-st.set_page_config(
-    page_title="VŠE AI Study Buddy",
-    page_icon=":robot_face:",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
 
 
 #os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"]
