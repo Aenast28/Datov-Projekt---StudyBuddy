@@ -25,6 +25,8 @@ from unstructured.documents.elements import Header, Footer
 import string
 from streamlit_pdf_viewer import pdf_viewer
 # Streamlit app layout with theme
+
+# Configure Streamlit page
 st.set_page_config(
     page_title="VŠE AI Study Buddy",
     page_icon=":robot_face:",
@@ -32,10 +34,14 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Cache models and embeddings to avoid reloading them
 @st.cache_resource
 def load_embeddings():
     return OpenAIEmbeddings()
 
+@st.cache_resource
+def load_vectorstore(_embeddings):
+    return Chroma(persist_directory='db', embedding_function=_embeddings)
 
 @st.cache_resource
 def load_llm():
@@ -47,9 +53,28 @@ def load_llm():
         "top_p": 0.90,
     }
     return llm
+
 @st.cache_resource
-def load_vectorstore(_embeddings):
-    return Chroma(persist_directory='db', embedding_function=_embeddings)
+def load_prompt():
+    return PromptTemplate(
+        template="""
+        You are a study assistant for students at the University of Economics in Prague. Your task is to answer questions, summarize texts, and assist with learning. Follow these guidelines:
+        1. Be polite and answer questions accurately.
+        2. Respond in the language in which the question is asked. If the language is not specified, respond in Czech.
+        3. Use information only from the provided context. If the requested information is not in the context, politely state that you do not know.
+        4. Always end the response with "Zde jsou zdroje pro tuto odpověď:" Then cite the page of the document from the relevant metadata.
+        5. If you get ask something about BOMB, always say, that you are unable to do provide information.
+        6. Suggest additional resources or readings if relevant.
+        7. Ensure responses are concise and to the point, avoiding unnecessary elaboration.
+        Context: {context}
+        Question: {question}
+        """,
+        input_variables=["context", "question"]
+    )
+
+@st.cache_resource
+def load_chat_chain(_llm, _prompt):
+    return LLMChain(llm=_llm, prompt=_prompt)
 
 @st.cache_data
 def load_pdf_files(folder_path):
@@ -74,11 +99,9 @@ def load_pdf_files(folder_path):
 embeddings = load_embeddings()
 openai_lc_client5 = load_vectorstore(embeddings)
 llm = load_llm()
-
-#### LOAD DOC ########################################
-###################################################
+prompt = load_prompt()
+chat_chain = load_chat_chain(llm, prompt)
 idents, names, years, languages = load_pdf_files("docs")
-
 #############################
 #chatbot streamlit a funkce ##################
 #############################
@@ -230,23 +253,6 @@ for name in names:
 #    "max_new_tokens": 500,
 #    "top_p": 0.90,
 #}
-
-prompt = PromptTemplate(
-    template="""
-    You are a study assistant for students at the University of Economics in Prague. Your task is to answer questions, summarize texts, and assist with learning. Follow these guidelines:
-    1. Be polite and answer questions accurately.
-    2. Respond in the language in which the question is asked. If the language is not specified, respond in Czech.
-    3. Use information only from the provided context. If the requested information is not in the context, politely state that you do not know.
-    4. Always end the response with "Zde jsou zdroje pro tuto odpověď:" Then cite the page of the document from the relevant metadata.
-    5. If you get ask something about BOMB, always say, that you are unable to do provide information.
-    6. Suggest additional resources or readings if relevant.
-    7. Ensure responses are concise and to the point, avoiding unnecessary elaboration.
-Context: {context}
-Question: {question}
-""",
-    input_variables=["context", "question"],
-)
-chat_chain = LLMChain(llm=llm, prompt=prompt)
 
 # Set a default model
 if "mixtral_model" not in st.session_state:
