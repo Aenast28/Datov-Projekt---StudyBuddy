@@ -103,7 +103,7 @@ def find_file_by_partial_name(directory, partial_name):
                 return os.path.join(root, file)
     return None
 
-def generate_response(query,chat_history):
+def generate_response(query):
     global name_file  # Deklarace globální proměnné name_file
     # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
