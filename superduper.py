@@ -208,7 +208,7 @@ llm.model_kwargs = {
     "temperature": 0.4,
     "repetition_penalty": 1.2,
     "max_new_tokens": 500,
-    "top_p": 0.85,
+    "top_p": 0.95,
 }
 
 prompt = PromptTemplate(
