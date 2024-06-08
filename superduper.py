@@ -143,7 +143,7 @@ def generate_response(query):
     
     # Store the query and response in chat history
     chat_history.append(f"User: {query}")
-    chat_history.append(f"Assistant: {response['text']}")
+    chat_history.append(f"{response['text']}")
     
     return response["text"], name_file, chat_history
 
@@ -214,7 +214,6 @@ llm.model_kwargs = {
 prompt = PromptTemplate(
     template="""
     You are a study assistant for students at the University of Economics in Prague. Your task is to answer questions, summarize texts, and assist with learning. Follow these guidelines:
-    0. Always start the response with "Děkuji za dotaz." Then continue with your answer.
     1. Be polite and answer questions accurately.
     2. Respond in the language in which the question is asked. If the language is not specified, respond in Czech.
     3. Use information only from the provided context. If the requested information is not in the context, politely state that you do not know.
