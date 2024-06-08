@@ -81,7 +81,7 @@ def similarity_search(query):
     
     # Perform the similarity search with the adjusted filters
     # Assuming openai_lc_client5 is defined and configured correctly
-    return openai_lc_client5.similarity_search(query, filter=filter_query)
+    return openai_lc_client5.similarity_search(query,k=2 filter=filter_query)
 
 
 
