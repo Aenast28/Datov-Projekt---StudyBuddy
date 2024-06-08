@@ -86,7 +86,7 @@ def similarity_search(query):
 
 
 # Function to generate response using similarity search and chat completion
-chat_history=["Huh cat"]
+chat_history=[]
 import re
 
 # Definice proměnné name_file
@@ -145,7 +145,7 @@ def generate_response(query):
     chat_history.append(f"Previous Question: {query}")
     chat_history.append(f"Previous Answer: {response['text']}")
     
-    return response["text"], name_file, chat_history
+    return response["text"], name_file, full_context
 
 
 
@@ -217,7 +217,7 @@ prompt = PromptTemplate(
     1. Be polite and answer questions accurately.
     2. Respond in the language in which the question is asked. If the language is not specified, respond in Czech.
     3. Use information only from the provided context. If the requested information is not in the context, politely state that you do not know.
-    4. Always end the response with "Zde jsou zdroje pro tuto odpověď:" Then cite the page of the document.
+    4. Always end the response with "Zde jsou zdroje pro tuto odpověď:" Then cite the page of the document from the relevant metadata.
     5. If you get ask something about BOMB, always say, that you are unable to do provide information.
     6. Provide examples or explanations to clarify complex concepts.
     7. Offer step-by-step solutions to problems when applicable.
