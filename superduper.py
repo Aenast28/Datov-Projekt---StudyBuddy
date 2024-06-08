@@ -25,6 +25,29 @@ from unstructured.documents.elements import Header, Footer
 import string
 from streamlit_pdf_viewer import pdf_viewer
 
+@st.cache_resource
+def load_embeddings():
+    return OpenAIEmbeddings()
+
+@st.cache_resource
+def load_vectorstore(embeddings):
+    return Chroma(persist_directory='db', embedding_function=embeddings)
+
+@st.cache_resource
+def load_llm():
+    llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1", deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
+    llm.model_kwargs = {
+        "temperature": 0.4,
+        "repetition_penalty": 1.2,
+        "max_new_tokens": 500,
+        "top_p": 0.90,
+    }
+    return llm
+
+embeddings = load_embeddings()
+openai_lc_client5 = load_vectorstore(embeddings)
+llm = load_llm()
+
 #### LOAD DOC ########################################
 ###################################################
 # Nastavit cestu k složce s PDF soubory
