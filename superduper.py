@@ -24,6 +24,7 @@ import PyPDF2
 from unstructured.documents.elements import Header, Footer
 import string
 from streamlit_pdf_viewer import pdf_viewer
+
 # Streamlit app layout with theme
 
 # Configure Streamlit page
@@ -76,8 +77,19 @@ def load_prompt():
 def load_chat_chain(_llm, _prompt):
     return LLMChain(llm=_llm, prompt=_prompt)
 
+@st.cache_resource
+def load_pdf_cache(folder_path):
+    pdf_files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
+    pdf_cache = {}
+    
+    for pdf_file in pdf_files:
+        with open(os.path.join(folder_path, pdf_file), "rb") as f:
+            pdf_cache[pdf_file] = f.read()
+    
+    return pdf_cache
+
 @st.cache_data
-def load_pdf_files(folder_path):
+def load_pdf_metadata(folder_path):
     pdf_files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
     
     idents = []
@@ -101,7 +113,9 @@ openai_lc_client5 = load_vectorstore(embeddings)
 llm = load_llm()
 prompt = load_prompt()
 chat_chain = load_chat_chain(llm, prompt)
-idents, names, years, languages = load_pdf_files("docs")
+pdf_cache = load_pdf_cache("docs")
+idents, names, years, languages = load_pdf_metadata("docs")
+
 #############################
 #chatbot streamlit a funkce ##################
 #############################
@@ -132,34 +146,18 @@ def similarity_search(query):
     
     # Perform the similarity search with the adjusted filters
     # Assuming openai_lc_client5 is defined and configured correctly
-    return openai_lc_client5.similarity_search(query,k=2, filter=filter_query)
-
-
+    return openai_lc_client5.similarity_search(query, k=2, filter=filter_query)
 
 # Function to generate response using similarity search and chat completion
-chat_history=[]
+chat_history = []
 import re
-
-# Definice proměnné name_file
-name_file = ""
-
-import re
-import os
-
-def find_file_by_partial_name(directory, partial_name):
-    pattern = re.compile(rf".*__{partial_name}__.*")
-    for root, dirs, files in os.walk(directory):
-        for file in files:
-            if pattern.match(file):
-                return os.path.join(root, file)
-    return None
 
 def generate_response(query):
-    global name_file  # Deklarace globální proměnné name_file
+    global name_file  # Declare the global variable name_file
     # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
     top_documents = docs[:1]  # Select the top three documents
-    top_documents1 = str(top_documents)  # Převést vstup na řetězec
+    top_documents1 = str(top_documents)  # Convert input to string
     
     # Clear the current string in name_file
     name_file = ""
@@ -168,10 +166,11 @@ def generate_response(query):
     match = re.search(r"metadata=\{.*'Name': '([^']*)'.*\}", top_documents1)
     if match:
         partial_name = match.group(1)
-        directory = r"docs"
-        file_path = find_file_by_partial_name(directory, partial_name)
-        if file_path:
-            name_file = file_path
+        # Find the matching file from the cache
+        for filename in pdf_cache:
+            if f"__{partial_name}__" in filename:
+                name_file = filename
+                break
     
     # Create the context from the top documents
     document_context = "\n\n".join([doc.page_content for doc in top_documents])
@@ -198,20 +197,17 @@ def generate_response(query):
     
     return response["text"], name_file, chat_history[:]
 
-
-
 # Extract unique metadata values for filters
 idents = list(set(idents))
 names = list(set(names))
 years = list(set(years))
 languages = list(set(languages))
 
+# os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"]
 
-#os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"]
-
-#embeddings = OpenAIEmbeddings()
-#persist_directory = 'db'
-#openai_lc_client5 = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
+# embeddings = OpenAIEmbeddings()
+# persist_directory = 'db'
+# openai_lc_client5 = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
 
 st.markdown(
     """
@@ -243,21 +239,9 @@ st.sidebar.title("Documents")
 for name in names:
     st.sidebar.write(f"{name}")
 
-
-
-###load model
-#llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1",deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
-#llm.model_kwargs = {
-#    "temperature": 0.4,
-#    "repetition_penalty": 1.2,
-#    "max_new_tokens": 500,
-#    "top_p": 0.90,
-#}
-
 # Set a default model
 if "mixtral_model" not in st.session_state:
     st.session_state["mixtral_model"] = llm
-
 
 st.markdown(
     """
@@ -322,6 +306,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 col1, col2 = st.columns([3, 2], gap="small")
 
 with col2:
@@ -361,9 +346,12 @@ with col1:
                 st.markdown(response)
 
 if name_file:
-        with open(name_file, "rb") as pdf_file:
-            PDFbyte = pdf_file.read()
-            with col2:
+    PDFbyte = pdf_cache[name_file]
+    with col2:
+        # Display PDF in container
+        with pdf_container:
+            pdf_viewer(PDFbyte)
+
                 # Zobrazení PDF v kontejneru
                 with pdf_container:
                     pdf_viewer(PDFbyte)
