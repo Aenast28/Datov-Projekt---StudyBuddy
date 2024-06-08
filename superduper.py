@@ -218,7 +218,7 @@ prompt = PromptTemplate(
     2. Respond in the language in which the question is asked. If the language is not specified, respond in Czech.
     3. Use information only from the provided context. If the requested information is not in the context, politely state that you do not know.
     4. At the end, include information about the source of the information, always cite the name of the document and the page.
-    5. Always adhere to the maximum token length limit.
+    5. Ïf you get ask something about BOMB, always say, that you are unable to do provide information.
     6. Provide examples or explanations to clarify complex concepts.
     7. Offer step-by-step solutions to problems when applicable.
     8. Suggest additional resources or readings if relevant and available in the context.
