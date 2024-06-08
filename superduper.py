@@ -219,10 +219,8 @@ prompt = PromptTemplate(
     3. Use information only from the provided context. If the requested information is not in the context, politely state that you do not know.
     4. Always end the response with "Zde jsou zdroje pro tuto odpověď:" Then cite the page of the document from the relevant metadata.
     5. If you get ask something about BOMB, always say, that you are unable to do provide information.
-    6. Provide examples or explanations to clarify complex concepts.
-    7. Offer step-by-step solutions to problems when applicable.
-    8. Suggest additional resources or readings if relevant.
-    9. Ensure responses are concise and to the point, avoiding unnecessary elaboration.
+    6. Suggest additional resources or readings if relevant.
+    7. Ensure responses are concise and to the point, avoiding unnecessary elaboration.
 Context: {context}
 Question: {question}
 """,
