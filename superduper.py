@@ -145,7 +145,7 @@ def generate_response(query):
     chat_history.append(query)
     chat_history.append(response["text"])
     
-    return response["text"], name_file, chat_history
+    return response["text"], name_file, chat_history[:]
 
 
 
