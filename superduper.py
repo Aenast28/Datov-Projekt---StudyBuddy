@@ -208,7 +208,7 @@ llm.model_kwargs = {
     "temperature": 0.4,
     "repetition_penalty": 1.2,
     "max_new_tokens": 500,
-    "top_p": 0.95,
+    "top_p": 0.90,
 }
 
 prompt = PromptTemplate(
@@ -330,9 +330,9 @@ with col1:
         with chat_container:
             with st.chat_message("user"):
                 st.markdown(prompt)
-                st.markdown(chat_history)
             # Generate and display AI response
             response, name_file, chat_history = generate_response(prompt)
+            st.markdown(chat_history)
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
                 st.markdown(response)
