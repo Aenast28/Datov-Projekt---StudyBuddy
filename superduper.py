@@ -103,7 +103,7 @@ def find_file_by_partial_name(directory, partial_name):
                 return os.path.join(root, file)
     return None
 
-def generate_response(query):
+def generate_response(query,chat_history):
     global name_file  # Deklarace globální proměnné name_file
     # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
@@ -330,10 +330,14 @@ with col1:
         with chat_container:
             with st.chat_message("user"):
                 st.markdown(prompt)
-            # Generate and display AI response
-            response, name_file, chat_history = generate_response(prompt)
-            chat_history.append(chat_history)
-            st.markdown(chat_history)
+                # Generate and display AI response
+                response, name_file, new_chat_history = generate_response(prompt, chat_history)
+                
+                # Update chat history
+                chat_history.extend(new_chat_history)
+                
+                # Display updated chat history
+                st.markdown("\n".join(chat_history))
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
                 st.markdown(response)
