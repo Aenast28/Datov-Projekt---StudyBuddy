@@ -50,35 +50,34 @@ def load_llm():
 @st.cache_resource
 def load_vectorstore(_embeddings):
     return Chroma(persist_directory='db', embedding_function=_embeddings)
+
+@st.cache_data
+def load_pdf_files(folder_path):
+    pdf_files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
+    
+    idents = []
+    names = []
+    years = []
+    languages = []
+    
+    for pdf_file in pdf_files:
+        filename_values = pdf_file.replace('.pdf', '').split('__')
+        ident, name, year, language = filename_values[0], filename_values[1], filename_values[2], filename_values[3]
+        
+        idents.append(ident)
+        names.append(name)
+        years.append(year)
+        languages.append(language)
+    
+    return idents, names, years, languages
+
 embeddings = load_embeddings()
 openai_lc_client5 = load_vectorstore(embeddings)
 llm = load_llm()
 
 #### LOAD DOC ########################################
 ###################################################
-# Nastavit cestu k složce s PDF soubory
-folder_path = "docs"
-# Získat seznam všech PDF souborů ve složce
-pdf_files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
-
-# Seznamy pro uložení jednotlivých hodnot
-idents = []
-names = []
-years = []
-languages = []
-# Načíst obsah všech PDF souborů a extrahovat hodnoty z názvů
-for pdf_file in pdf_files:
-    # Extrahovat hodnoty z názvu souboru
-    filename_values = pdf_file.replace('.pdf', '').split('__')
-    ident, name, year, language = filename_values[0], filename_values[1], filename_values[2], filename_values[3]
-    
-    # Uložit jednotlivé hodnoty do seznamů
-    idents.append(ident)
-    names.append(name)
-    years.append(year)
-    languages.append(language)
-
-
+idents, names, years, languages = load_pdf_files("docs")
 
 #############################
 #chatbot streamlit a funkce ##################
