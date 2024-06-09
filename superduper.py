@@ -1,7 +1,6 @@
 __import__('pysqlite3')
 import sys
 import base64
-import time
 from pdf2image import convert_from_path
 from PIL import Image
 import streamlit as st
@@ -357,17 +356,9 @@ with col1:
                 st.markdown(prompt)
             # Generate and display AI response
             response, name_file, chat_history = generate_response(prompt)
-            # Split the response into smaller chunks
-            response_chunks = response.split(". ")
-            # Display each chunk separately with a slight delay
-            for i, chunk in enumerate(response_chunks):
-                st.session_state.messages.append({"role": "assistant", "content": chunk + "."})
-                with st.chat_message("assistant"):
-                    st.markdown(chunk + ".")
-                if i < len(response_chunks) - 1:
-                    # Add a small delay for a more natural feel
-                    time.sleep(0.1)
-
+            st.session_state.messages.append({"role": "assistant", "content": response})
+            with st.chat_message("assistant"):
+                st.markdown(response)
 
 if name_file:
         with open(name_file, "rb") as pdf_file:
