@@ -365,8 +365,7 @@ with col1:
                     st.markdown(chunk + ".")
                 if i < len(response_chunks) - 1:
                     # Add a small delay for a more natural feel
-                    st.experimental_rerun()
-                    st.experimental_rerun()
+                    time.sleep(0.1)
                     st.experimental_rerun()
 
 
