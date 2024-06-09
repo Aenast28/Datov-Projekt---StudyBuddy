@@ -1,5 +1,4 @@
 __import__('pysqlite3')
-import time
 import sys
 import base64
 from pdf2image import convert_from_path
@@ -357,12 +356,9 @@ with col1:
                 st.markdown(prompt)
             # Generate and display AI response
             response, name_file, chat_history = generate_response(prompt)
-            # Split response into chunks and display gradually
-            for chunk in response.split():
-                st.session_state.messages[-1]["content"] += chunk + " "
-                st.markdown(st.session_state.messages[-1]["content"])  # Update UI with markdown
-                time.sleep(0.5)  # Adjust sleep time as needed
-                st.experimental_rerun()  # Rerun to update UI
+            st.session_state.messages.append({"role": "assistant", "content": response})
+            with st.chat_message("assistant"):
+                st.markdown(response)
 
 if name_file:
         with open(name_file, "rb") as pdf_file:
