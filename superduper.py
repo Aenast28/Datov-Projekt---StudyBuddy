@@ -322,6 +322,15 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+import time
+
+# Function to simulate real-time typing of the AI response
+def display_incrementally(text, container):
+    for chunk in text.split(" "):
+        with container:
+            st.markdown(chunk + " ")
+        time.sleep(0.1)  # Adjust the speed as needed
+
 col1, col2 = st.columns([3, 2], gap="small")
 
 with col2:
@@ -346,7 +355,6 @@ with col1:
     # Spacer to push the input to the bottom
     st.write('<div style="flex-grow: 1;"></div>', unsafe_allow_html=True)
     
-    # Chat input at the bottom of col1
     if prompt := st.chat_input("Ask your study buddy"):
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
@@ -354,16 +362,19 @@ with col1:
         with chat_container:
             with st.chat_message("user"):
                 st.markdown(prompt)
-            # Generate and display AI response
+            
+            # Generate AI response (modify this to suit your response generation logic)
             response, name_file, chat_history = generate_response(prompt)
             st.session_state.messages.append({"role": "assistant", "content": response})
-            with st.chat_message("assistant"):
-                st.markdown(response)
-
-if name_file:
+            
+            # Display AI response incrementally
+            with st.chat_message("assistant") as message_container:
+                display_incrementally(response, message_container)
+    
+    if name_file:
         with open(name_file, "rb") as pdf_file:
             PDFbyte = pdf_file.read()
             with col2:
-                # Zobrazení PDF v kontejneru
+                # Display PDF in container
                 with pdf_container:
                     pdf_viewer(PDFbyte)
