@@ -357,8 +357,12 @@ with col1:
             # Generate and display AI response
             response, name_file, chat_history = generate_response(prompt)
             st.session_state.messages.append({"role": "assistant", "content": response})
-            with st.chat_message("assistant"):
-                st.markdown(response)
+            with st.spinner("Thinking..."):
+                # Split response into chunks and display gradually
+                for chunk in response.split():
+                    st.session_state.messages[-1]["content"] += chunk + " "
+                    time.sleep(0.1)  # Adjust sleep time as needed
+                    st.experimental_rerun()  # Rerun to update UI
 
 if name_file:
         with open(name_file, "rb") as pdf_file:
