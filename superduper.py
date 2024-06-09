@@ -1,6 +1,7 @@
 __import__('pysqlite3')
 import sys
 import base64
+import time
 from pdf2image import convert_from_path
 from PIL import Image
 import streamlit as st
