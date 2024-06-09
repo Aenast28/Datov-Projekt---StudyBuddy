@@ -1,4 +1,5 @@
 __import__('pysqlite3')
+import time
 import sys
 import base64
 from pdf2image import convert_from_path
