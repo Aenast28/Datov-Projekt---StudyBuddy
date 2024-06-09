@@ -367,7 +367,6 @@ with col1:
                 if i < len(response_chunks) - 1:
                     # Add a small delay for a more natural feel
                     time.sleep(0.1)
-                    st.experimental_rerun()
 
 
 if name_file:
