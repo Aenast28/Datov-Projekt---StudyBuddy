@@ -356,9 +356,19 @@ with col1:
                 st.markdown(prompt)
             # Generate and display AI response
             response, name_file, chat_history = generate_response(prompt)
-            st.session_state.messages.append({"role": "assistant", "content": response})
-            with st.chat_message("assistant"):
-                st.markdown(response)
+            # Split the response into smaller chunks
+            response_chunks = response.split(". ")
+            # Display each chunk separately with a slight delay
+            for i, chunk in enumerate(response_chunks):
+                st.session_state.messages.append({"role": "assistant", "content": chunk + "."})
+                with st.chat_message("assistant"):
+                    st.markdown(chunk + ".")
+                if i < len(response_chunks) - 1:
+                    # Add a small delay for a more natural feel
+                    st.experimental_rerun()
+                    st.experimental_rerun()
+                    st.experimental_rerun()
+
 
 if name_file:
         with open(name_file, "rb") as pdf_file:
