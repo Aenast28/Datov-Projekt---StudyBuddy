@@ -82,7 +82,7 @@ def generate_response(prompt, history=[]):
     return response, "example.pdf", history
 
 # Streamlit app layout
-st.sidebar.image('path/to/VSE_logo.png', width=150)
+st.sidebar.image('path/to/logo_fis.jpg', width=150)
 st.sidebar.markdown("# VŠE AI Study Buddy")
 
 col1, col2 = st.columns([2, 1])
