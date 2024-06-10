@@ -178,7 +178,7 @@ def generate_response(query):
         "Facts from documents:\n"
         + document_context
         + "\n\nChat history:\n"
-        + "\n".join(chat_history)
+        #+ "\n".join(chat_history)
     )
 
     # Generate the response using the full context
