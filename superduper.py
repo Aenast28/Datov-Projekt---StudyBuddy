@@ -135,16 +135,10 @@ def similarity_search(query):
     return openai_lc_client5.similarity_search(query,k=2, filter=filter_query)
 
 
-
-# Function to generate response using similarity search and chat completion
-chat_history=[]
-import re
-
-# Definice proměnné name_file
-name_file = ""
-
 import re
 import os
+
+chat_history = []
 
 def find_file_by_partial_name(directory, partial_name):
     pattern = re.compile(rf".*__{partial_name}__.*")
@@ -155,11 +149,13 @@ def find_file_by_partial_name(directory, partial_name):
     return None
 
 def generate_response(query):
-    global name_file  # Deklarace globální proměnné name_file
+    global name_file  # Declare the global variable name_file
+    global chat_history  # Declare the global variable chat_history
+
     # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
-    top_documents = docs[:1]  # Select the top three documents
-    top_documents1 = str(top_documents)  # Převést vstup na řetězec
+    top_documents = docs[:1]  # Select the top document
+    top_documents1 = str(top_documents)  # Convert to string
     
     # Clear the current string in name_file
     name_file = ""
@@ -193,10 +189,11 @@ def generate_response(query):
     )
     
     # Store the query and response in chat history
-    chat_history.append(query)
-    chat_history.append(response["text"])
+    chat_history.append("User: " + query)
+    chat_history.append("Bot: " + response["text"])
     
     return response["text"], name_file, chat_history[:]
+
 
 
 
@@ -359,7 +356,7 @@ with col1:
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
                 st.markdown(response)
-                #st.markdown(chat_history)
+                st.markdown(chat_history)
 
 
 if name_file:
