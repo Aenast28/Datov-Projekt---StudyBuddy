@@ -1,13 +1,13 @@
-<mxfile host="app.diagrams.net" modified="2024-06-10T17:34:09.975Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="ht35ODxAk-6CyGQfmbhu" version="24.5.2" type="github">
+<mxfile host="app.diagrams.net" modified="2024-06-10T18:00:52.578Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="LD_reMt12lwBiPKwOOyn" version="24.5.2" type="github">
   <diagram name="Stránka-1" id="PVMh3fb2kLKUdeauMjn0">
-    <mxGraphModel dx="521" dy="557" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1877" dy="557" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="Y6qf1inivHKss2DE0N5O-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-1" target="Y6qf1inivHKss2DE0N5O-7">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Y6qf1inivHKss2DE0N5O-1" value="Studijní materiály od učitelů" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+        <mxCell id="Y6qf1inivHKss2DE0N5O-1" value="Studijní&amp;nbsp; &amp;nbsp;materiály od učitelů" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
           <mxGeometry x="10" y="90" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Y6qf1inivHKss2DE0N5O-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-2" target="Y6qf1inivHKss2DE0N5O-7">
@@ -19,7 +19,7 @@
         <mxCell id="Y6qf1inivHKss2DE0N5O-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-3" target="Y6qf1inivHKss2DE0N5O-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Y6qf1inivHKss2DE0N5O-3" value="On-premise databáze VŠE" style="shape=dataStorage;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+        <mxCell id="Y6qf1inivHKss2DE0N5O-3" value="On-prem databáze VŠE" style="shape=dataStorage;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
           <mxGeometry x="320" y="80" width="100" height="80" as="geometry" />
         </mxCell>
         <mxCell id="Y6qf1inivHKss2DE0N5O-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-7" target="Y6qf1inivHKss2DE0N5O-3">
@@ -38,7 +38,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Y6qf1inivHKss2DE0N5O-13" value="Chroma vektorová databáze" style="shape=dataStorage;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="420" y="340" width="100" height="80" as="geometry" />
+          <mxGeometry x="510" y="350" width="100" height="80" as="geometry" />
         </mxCell>
         <mxCell id="Y6qf1inivHKss2DE0N5O-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-14" target="Y6qf1inivHKss2DE0N5O-35">
           <mxGeometry relative="1" as="geometry" />
@@ -49,19 +49,22 @@
         <mxCell id="Y6qf1inivHKss2DE0N5O-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-17" target="Y6qf1inivHKss2DE0N5O-19">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Y6qf1inivHKss2DE0N5O-17" value="Uživatelský dotaz" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+        <mxCell id="Y6qf1inivHKss2DE0N5O-75" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-17" target="Y6qf1inivHKss2DE0N5O-73">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-17" value="Uživatelský&amp;nbsp; &amp;nbsp;dotaz" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
           <mxGeometry x="10" y="250" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Y6qf1inivHKss2DE0N5O-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-18" target="Y6qf1inivHKss2DE0N5O-20">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Y6qf1inivHKss2DE0N5O-18" value="Uživatelské filtry" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+        <mxCell id="Y6qf1inivHKss2DE0N5O-18" value="&amp;nbsp; &amp;nbsp;Uživatelské&amp;nbsp; &amp;nbsp; &amp;nbsp;filtry" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
           <mxGeometry x="10" y="320" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Y6qf1inivHKss2DE0N5O-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-19" target="Y6qf1inivHKss2DE0N5O-43">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Y6qf1inivHKss2DE0N5O-19" value="tokenizace a vektorizace" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+        <mxCell id="Y6qf1inivHKss2DE0N5O-19" value="vektorizace" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="170" y="255" width="100" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Y6qf1inivHKss2DE0N5O-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-20" target="Y6qf1inivHKss2DE0N5O-13">
@@ -74,16 +77,31 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Y6qf1inivHKss2DE0N5O-24" value="sémantické vyhledávání" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="420" y="255" width="100" height="50" as="geometry" />
+          <mxGeometry x="470" y="255" width="100" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="Y6qf1inivHKss2DE0N5O-30" value="Odpověď modelu" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
-          <mxGeometry x="10" y="410" width="100" height="60" as="geometry" />
+        <mxCell id="Y6qf1inivHKss2DE0N5O-72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-30" target="Y6qf1inivHKss2DE0N5O-73">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-70" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-30" value="Odpověď&amp;nbsp; &amp;nbsp;modelu" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="10" y="540" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Y6qf1inivHKss2DE0N5O-31" value="Náhled dokumentu" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
-          <mxGeometry x="10" y="480" width="100" height="60" as="geometry" />
+          <mxGeometry x="10" y="610" width="100" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="Y6qf1inivHKss2DE0N5O-33" value="kontext pro model" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
-          <mxGeometry x="420" y="480" width="100" height="60" as="geometry" />
+        <mxCell id="Y6qf1inivHKss2DE0N5O-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-33" target="Y6qf1inivHKss2DE0N5O-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-33" target="Y6qf1inivHKss2DE0N5O-55">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560" y="640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-33" value="chunky kontextu pro model spojené s dotazem" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
+          <mxGeometry x="510" y="540" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Y6qf1inivHKss2DE0N5O-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-34" target="Y6qf1inivHKss2DE0N5O-14">
           <mxGeometry relative="1" as="geometry" />
@@ -102,6 +120,67 @@
         </mxCell>
         <mxCell id="Y6qf1inivHKss2DE0N5O-43" value="embeddingové vektory" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="1">
           <mxGeometry x="300" y="250" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-48" target="Y6qf1inivHKss2DE0N5O-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-48" value="inference LLM Mixtral skrze DeepInfra API" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="260" y="545" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-49" target="Y6qf1inivHKss2DE0N5O-48">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-49" value="tokenizace" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="390" y="545" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-52" target="Y6qf1inivHKss2DE0N5O-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-52" value="detokenizace" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="130" y="545" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-55" target="Y6qf1inivHKss2DE0N5O-57">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-55" value="identifikace dokumentu z něhož pochází chunky" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="390" y="612.5" width="100" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-57" target="Y6qf1inivHKss2DE0N5O-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-57" value="načtení daného dokumentu z On-prem databáze VŠE" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="260" y="612.5" width="100" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-60" value="Vstupy" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-20" y="80" width="140" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-63" value="Historie chatu" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="Y6qf1inivHKss2DE0N5O-60">
+          <mxGeometry x="30" y="310" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-62" value="Výstupy" style="swimlane;horizontal=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-20" y="530" width="140" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-63" target="Y6qf1inivHKss2DE0N5O-68">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="181.5" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-68" target="Y6qf1inivHKss2DE0N5O-33">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="480" />
+              <mxPoint x="560" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-68" value="spojení s výstupem z Chroma databáze" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="170" y="395" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Y6qf1inivHKss2DE0N5O-73" target="Y6qf1inivHKss2DE0N5O-63">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y6qf1inivHKss2DE0N5O-73" value="uložení do historie chatu" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-140" y="395" width="100" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
