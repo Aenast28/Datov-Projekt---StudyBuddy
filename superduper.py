@@ -139,7 +139,7 @@ import re
 import os
 
 chat_history = []
-
+name_file=""
 def find_file_by_partial_name(directory, partial_name):
     pattern = re.compile(rf".*__{partial_name}__.*")
     for root, dirs, files in os.walk(directory):
