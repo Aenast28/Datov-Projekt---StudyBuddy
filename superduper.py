@@ -192,7 +192,7 @@ def generate_response(query):
         
 
     
-    return response["text"], name_file, chat_history
+    return response["text"], name_file
 
 
 
@@ -352,7 +352,7 @@ with col1:
             with st.chat_message("user"):
                 st.markdown(prompt)
             # Generate and display AI response
-            response, name_file, chat_history = generate_response(prompt)
+            response, name_file = generate_response(prompt)
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
                 st.markdown(response)
