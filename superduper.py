@@ -354,11 +354,9 @@ with col1:
             # Generate and display AI response
             response, name_file = generate_response(prompt)
             st.session_state.messages.append({"role": "assistant", "content": response})
-            chat_history.add_user_message(prompt)
-            chat_history.add_ai_message(response)
             with st.chat_message("assistant"):
                 st.markdown(response)
-                st.markdown(chat_history)
+                st.markdown(st.session_state.messages)
 
 
 if name_file:
