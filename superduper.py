@@ -24,7 +24,7 @@ import PyPDF2
 from unstructured.documents.elements import Header, Footer
 import string
 from streamlit_pdf_viewer import pdf_viewer
-# Streamlit app layout with theme
+from langchain.memory import ChatMessageHistory
 
 # Configure Streamlit page
 st.set_page_config(
@@ -138,7 +138,8 @@ def similarity_search(query):
 import re
 import os
 
-chat_history = []
+chat_history = ChatMessageHistory()
+
 name_file=""
 def find_file_by_partial_name(directory, partial_name):
     pattern = re.compile(rf".*__{partial_name}__.*")
@@ -188,11 +189,12 @@ def generate_response(query):
         }
     )
     
-    # Store the query and response in chat history
-    chat_history.append("User: " + query)
-    chat_history.append("Bot: " + response["text"])
+        
+    chat_history.add_user_message(query)
     
-    return response["text"], name_file, chat_history[:]
+    chat_history.add_ai_message(response["text"])
+    
+    return response["text"], name_file, chat_history
 
 
 
