@@ -169,13 +169,14 @@ def generate_response(query):
     
     # Create the context from the top documents
     document_context = "\n\n".join([doc.page_content for doc in top_documents])
-    
+    joined_messages = "\n".join(st.session_state.messages)
+
     # Combine the chat history and the new context
     full_context = (
         "Facts from documents:\n"
         + document_context
         + "\n\nChat history:\n"
-        + "\n".join(st.session_state.messages)
+        + "\n".join(joined_messages)
     )
 
     # Generate the response using the full context
