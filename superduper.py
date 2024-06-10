@@ -190,9 +190,7 @@ def generate_response(query):
     )
     
         
-    chat_history.add_user_message(query)
-    
-    chat_history.add_ai_message(response["text"])
+
     
     return response["text"], name_file, chat_history
 
@@ -358,6 +356,8 @@ with col1:
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
                 st.markdown(response)
+                chat_history.add_user_message(prompt)
+                chat_history.add_ai_message(response)
                 st.markdown(chat_history)
 
 
