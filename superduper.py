@@ -138,8 +138,6 @@ def similarity_search(query):
 import re
 import os
 
-chat_history = ChatMessageHistory()
-
 name_file=""
 def find_file_by_partial_name(directory, partial_name):
     pattern = re.compile(rf".*__{partial_name}__.*")
@@ -151,7 +149,6 @@ def find_file_by_partial_name(directory, partial_name):
 
 def generate_response(query):
     global name_file  # Declare the global variable name_file
-    global chat_history  # Declare the global variable chat_history
 
     # Perform similarity search to retrieve relevant documents
     docs = similarity_search(query)
@@ -178,7 +175,7 @@ def generate_response(query):
         "Facts from documents:\n"
         + document_context
         + "\n\nChat history:\n"
-        + "\n".join(chat_history)
+        + "\n".join(st.session_state.messages)
     )
 
     # Generate the response using the full context
