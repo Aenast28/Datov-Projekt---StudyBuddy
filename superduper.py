@@ -175,8 +175,10 @@ def generate_response(query):
     
     # Combine the chat history and the new context
     full_context = (
+        "Facts from documents:\n"
         + document_context
-        + st.session_state.messages
+        + "\n\nChat history:\n"
+        + "\n".join(chat_history)
     )
 
     # Generate the response using the full context
@@ -354,6 +356,7 @@ with col1:
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
                 st.markdown(response)
+                st.markdown(st.session_state.messages)
 
 
 if name_file:
