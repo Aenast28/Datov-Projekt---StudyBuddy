@@ -1,5 +1,6 @@
 __import__('pysqlite3')
 import sys
+import json
 import base64
 from pdf2image import convert_from_path
 from PIL import Image
@@ -169,14 +170,14 @@ def generate_response(query):
     
     # Create the context from the top documents
     document_context = "\n\n".join([doc.page_content for doc in top_documents])
-    joined_messages = "\n".join(st.session_state.messages)
+    string_messages = [json.dumps(message) for message in st.session_state.messages]
 
     # Combine the chat history and the new context
     full_context = (
         "Facts from documents:\n"
         + document_context
         + "\n\nChat history:\n"
-        + "\n".join(joined_messages)
+        + "\n".join(string_messages)
     )
 
     # Generate the response using the full context
