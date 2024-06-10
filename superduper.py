@@ -359,7 +359,7 @@ with col1:
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
                 st.markdown(response)
-                st.markdown(chat_history)
+                #st.markdown(chat_history)
 
 
 if name_file:
