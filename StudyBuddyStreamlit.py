@@ -129,7 +129,7 @@ def find_file_by_partial_name(directory, partial_name):
             if pattern.match(file):
                 return os.path.join(root, file)
     return None
-
+name_file=""
 # Function to generate a response from the model
 def generate_response(query):
     global name_file  # Declare the global variable name_file
