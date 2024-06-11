@@ -13,6 +13,8 @@ from langchain_openai import OpenAIEmbeddings
 import re
 from streamlit_pdf_viewer import pdf_viewer
 
+### INITIAL STREAMLIT CONFIGURATION
+
 # Configure Streamlit page
 st.set_page_config(
     page_title="VŠE AI Study Buddy",
@@ -21,28 +23,87 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Cache models and embeddings to avoid reloading them
+#### ALL CACHED RESOURCES 
+# Streamlit is able to used cached resources to speed up the application by loading it once and then referring to it with each call.
+
 @st.cache_resource
-def load_embeddings():
+def load_embeddings() -> OpenAIEmbeddings:
+    """
+    Load and return OpenAI embeddings.
+
+    This function initializes and returns an instance of OpenAIEmbeddings, which is then used to embed input query into vectors.
+
+    Returns:
+        OpenAIEmbeddings: An instance of OpenAIEmbeddings ready for use.
+    """
     return OpenAIEmbeddings()
 
 @st.cache_resource
-def load_vectorstore(_embeddings):
+def load_vectorstore(_embeddings: OpenAIEmbeddings) -> Chroma:
+    """
+    Load and return a Chroma vector store using the provided embeddings.
+
+    This function initializes and returns an instance of Chroma, configured to use the provided
+    embeddings function and set to persist data in the 'db' directory. This can be used for 
+    efficiently storing and retrieving vector representations of data.
+
+    Args:
+        _embeddings (OpenAIEmbeddings): The embeddings function to use for the vector store.
+
+    Returns:
+        Chroma: An instance of Chroma configured with the specified embeddings and persistence settings.
+    """
     return Chroma(persist_directory='db', embedding_function=_embeddings)
 
+
 @st.cache_resource
-def load_llm():
+def load_llm() -> DeepInfra:
+    """
+    Load and return a configured DeepInfra language model.
+
+    This function initializes and configures an instance of DeepInfra with a specified model ID 
+    and API token. The language model is then configured with a set of hyperparameters including 
+    temperature, repetition penalty, maximum new tokens, and top_p.
+
+    Hyperparameters:
+        temperature (float): Controls the randomness of the predictions. Lower values make the 
+                             output more deterministic, while higher values make it more random.
+        repetition_penalty (float): Penalizes repetition of words to reduce repetitive output.
+        max_new_tokens (int): The maximum number of tokens to generate in the response.
+        top_p (float): The cumulative probability threshold for nucleus sampling. Determines the 
+                       diversity of the output by considering the top tokens with a cumulative 
+                       probability up to top_p.
+
+    Returns:
+        DeepInfra: A configured instance of the DeepInfra language model ready for use.
+    """
     llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1", deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
     llm.model_kwargs = {
-        "temperature": 0.4,
-        "repetition_penalty": 1.2,
-        "max_new_tokens": 500,
-        "top_p": 0.90,
+        "temperature": 0.4,  # Controls randomness: lower value = more deterministic
+        "repetition_penalty": 1.2,  # Penalizes repetitive text
+        "max_new_tokens": 500,  # Maximum tokens to generate
+        "top_p": 0.90,  # Nucleus sampling threshold
     }
     return llm
 
 @st.cache_resource
-def load_prompt():
+def load_prompt() -> PromptTemplate:
+    """
+    Load and return a configured PromptTemplate for a study assistant.
+
+    This function initializes and returns an instance of PromptTemplate, configured with a 
+    template specifically designed for a study assistant at the University of Economics in Prague. 
+    The template includes guidelines for responding to questions, summarizing texts, and assisting 
+    with learning. The assistant is instructed to follow several key guidelines to ensure accurate, 
+    polite, and contextually appropriate responses.
+
+    Template Parameters:
+        context (str): The context in which the assistant operates, providing necessary information for answering questions.
+        question (str): The question posed by the student that the assistant needs to answer.
+
+    Returns:
+        PromptTemplate: A configured instance of PromptTemplate ready for use.
+    """
     return PromptTemplate(
         template="""
         You are a study assistant for students at the University of Economics in Prague. Your task is to answer questions, summarize texts, and assist with learning. Follow these guidelines:
@@ -60,11 +121,43 @@ def load_prompt():
     )
 
 @st.cache_resource
-def load_chat_chain(_llm, _prompt):
+def load_chat_chain(_llm: DeepInfra, _prompt: PromptTemplate) -> LLMChain:
+    """
+    Load and return a configured LLMChain for a chat-based application.
+
+    This function initializes and returns an instance of LLMChain, configured with a provided 
+    language model (_llm) and a prompt template (_prompt). The LLMChain facilitates interaction 
+    with the language model using the specified prompt, enabling it to generate responses based 
+    on the input variables defined in the prompt.
+
+    Args:
+        _llm (DeepInfra): The language model to be used for generating responses.
+        _prompt (PromptTemplate): The prompt template that defines the structure and guidelines 
+                                  for the responses.
+
+    Returns:
+        LLMChain: A configured instance of LLMChain ready for use in a chat-based application.
+    """
     return LLMChain(llm=_llm, prompt=_prompt)
 
+
 @st.cache_data
-def load_pdf_files(folder_path):
+
+def load_pdf_files(folder_path: str):
+    """
+    Load and extract information from PDF files in the specified folder.
+
+    This function scans the specified folder for PDF files and extracts metadata from their filenames.
+    The filenames are expected to follow the format: `ident__name__year__language.pdf`. The extracted 
+    information includes identifiers, names, years, and languages, which are returned as separate lists.
+
+    Args:
+        folder_path (str): The path to the folder containing the PDF files.
+
+    Returns:
+        Four lists containing the identifiers, 
+        names, years, and languages extracted from the PDF filenames.
+    """
     pdf_files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
     
     idents = []
@@ -82,8 +175,24 @@ def load_pdf_files(folder_path):
         languages.append(language)
     
     return idents, names, years, languages
-def escape_markdown(text):
+
+def escape_markdown(text: str) -> str:
+    """
+    Escape Markdown special characters in the given text.
+
+    This function takes a string and escapes special Markdown characters such as 
+    asterisks (*), underscores (_), backticks (`), and tildes (~) by preceding 
+    them with a backslash. This is useful for displaying text literally in Markdown 
+    without it being interpreted as formatting.
+
+    Args:
+        text (str): The input text containing Markdown characters to be escaped.
+
+    Returns:
+        str: The text with Markdown special characters escaped.
+    """
     return re.sub(r'([*_`~])', r'\\\1', text)
+
 
 embeddings = load_embeddings()
 openai_lc_client5 = load_vectorstore(embeddings)
