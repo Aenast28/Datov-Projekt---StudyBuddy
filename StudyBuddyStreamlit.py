@@ -4,6 +4,7 @@ import json
 import streamlit as st
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
+from typing import Tuple
 from langchain.vectorstores import Chroma
 from langchain.chains import LLMChain
 from langchain.prompts.prompt import PromptTemplate
@@ -195,7 +196,24 @@ def escape_markdown(text: str) -> str:
 
 ### NON CACHED FUNCTIONS
 # Functions, that for some reason can't be cached and muset be always called individually no matter what
-def find_file_by_partial_name(directory, partial_name):
+
+def find_file_by_partial_name(directory: str, partial_name: str):
+    """
+    Find a file by partial name in a specified directory.
+
+    This function searches through the given directory and its subdirectories for a file whose 
+    name contains the specified partial name, following the pattern `.*__{partial_name}__.*`. 
+    If such a file is found, the function returns the full path to the file. If no such file 
+    is found, it returns None.
+
+    Args:
+        directory (str): The directory to search in.
+        partial_name (str): The partial name to search for within the filenames.
+
+    Returns:
+        The full path to the first file found that matches the pattern, 
+        or None if no such file is found.
+    """
     pattern = re.compile(rf".*__{partial_name}__.*")
     for root, dirs, files in os.walk(directory):
         for file in files:
@@ -203,7 +221,22 @@ def find_file_by_partial_name(directory, partial_name):
                 return os.path.join(root, file)
     return None
 
-def generate_response(query):
+def generate_response(query: str) -> Tuple[str, str]:
+    """
+    Generate a response based on the provided query.
+
+    This function processes the user's query by performing a similarity search to retrieve relevant documents.
+    It then selects the top document and extracts its metadata, specifically the 'Name' field. It searches for
+    a file with a partial name match in the 'docs' directory and returns the file path if found. The document
+    context is created from the top documents, combined with the chat history, and used as the context for generating
+    a response using the chat_chain model.
+
+    Args:
+        query (str): The user's query.
+
+    Returns:
+        Tuple[str, str]: A tuple containing the generated response text and the path to the relevant file.
+    """
     global name_file  # Declare the global variable name_file
 
     # Perform similarity search to retrieve relevant documents
@@ -242,9 +275,6 @@ def generate_response(query):
             "question": query,
         }
     )
-    
-        
-
     
     return response["text"], name_file
 
