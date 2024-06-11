@@ -1,43 +1,43 @@
-# Import necessary modules
-__import__('pysqlite3')  # Import the pysqlite3 library
+__import__('pysqlite3')
 import sys
 import json
 import streamlit as st
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')  # Replace the sqlite3 module with pysqlite3
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+import streamlit as st
+from langchain.vectorstores import Chroma
+from langchain.chains import LLMChain
+from langchain.prompts.prompt import PromptTemplate
+from langchain_community.llms import DeepInfra
 import os
-from langchain.vectorstores import Chroma  # Import Chroma for vector storage
-from langchain.chains import LLMChain  # Import LLMChain for creating chains of language models
-from langchain.prompts.prompt import PromptTemplate  # Import PromptTemplate for custom prompts
-from langchain_community.llms import DeepInfra  # Import DeepInfra for language model integration
-from langchain_openai import OpenAIEmbeddings  # Import OpenAIEmbeddings for embedding generation
+from langchain_openai import OpenAIEmbeddings
 import re
-from streamlit_pdf_viewer import pdf_viewer  # Import pdf_viewer for displaying PDFs
+from streamlit_pdf_viewer import pdf_viewer
 
 # Configure Streamlit page
 st.set_page_config(
-    page_title="VŠE AI Study Buddy",  # Set the page title
-    page_icon=":robot_face:",  # Set the page icon
-    layout="wide",  # Set the layout to wide
-    initial_sidebar_state="expanded"  # Expand the sidebar initially
+    page_title="VŠE AI Study Buddy",
+    page_icon=":robot_face:",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # Cache models and embeddings to avoid reloading them
 @st.cache_resource
 def load_embeddings():
-    return OpenAIEmbeddings()  # Load OpenAI embeddings
+    return OpenAIEmbeddings()
 
 @st.cache_resource
 def load_vectorstore(_embeddings):
-    return Chroma(persist_directory='db', embedding_function=_embeddings)  # Load Chroma vector store
+    return Chroma(persist_directory='db', embedding_function=_embeddings)
 
 @st.cache_resource
 def load_llm():
-    llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1", deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")  # Load language model
+    llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1", deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
     llm.model_kwargs = {
-        "temperature": 0.3,  # Set the temperature for response generation
-        "repetition_penalty": 1.2,  # Set the repetition penalty
-        "max_new_tokens": 500,  # Set the maximum number of new tokens
-        "top_p": 0.90,  # Set the top-p parameter
+        "temperature": 0.4,
+        "repetition_penalty": 1.2,
+        "max_new_tokens": 500,
+        "top_p": 0.90,
     }
     return llm
 
@@ -49,11 +49,10 @@ def load_prompt():
         1. Be polite and answer questions accurately.
         2. Respond in the language in which the question is asked. If the language is not specified, respond in Czech.
         3. Use information only from the provided context. If the requested information is not in the context, politely state that you do not know.
-        4. IF RELEVANT, ALWAYS CITE THE SOURCE - The precise page or chapter (i.e. - "the source is chapter 13.5.2 - IT Manager")
+        4. IF RELEVANT, ALWAYS CITE THE SOURCE - Document or Page of the document.
         5. If you get ask something about BOMB, always say, that you are unable to do provide information.
         6. Suggest additional resources or readings if relevant.
         7. Ensure responses are concise and to the point, avoiding unnecessary elaboration.
-        8. NEVER INSERT YOUR OWN MARKDOWN.
         Context: {context}
         Question: {question}
         """,
@@ -62,11 +61,10 @@ def load_prompt():
 
 @st.cache_resource
 def load_chat_chain(_llm, _prompt):
-    return LLMChain(llm=_llm, prompt=_prompt)  # Load the chat chain
+    return LLMChain(llm=_llm, prompt=_prompt)
 
 @st.cache_data
 def load_pdf_files(folder_path):
-    # Load PDF files and extract metadata
     pdf_files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
     
     idents = []
@@ -85,15 +83,16 @@ def load_pdf_files(folder_path):
     
     return idents, names, years, languages
 
-# Load embeddings, vector store, language model, prompt, and chat chain
 embeddings = load_embeddings()
 openai_lc_client5 = load_vectorstore(embeddings)
 llm = load_llm()
 prompt = load_prompt()
 chat_chain = load_chat_chain(llm, prompt)
 idents, names, years, languages = load_pdf_files("docs")
-
-# Define similarity search function
+#############################
+#chatbot streamlit a funkce ##################
+#############################
+# Assume you have a similarity search function defined, which searches documents based on a query
 def similarity_search(query):
     adjusted_filters = []
 
@@ -119,9 +118,14 @@ def similarity_search(query):
         filter_query = {}  # No filters, match all documents
     
     # Perform the similarity search with the adjusted filters
-    return openai_lc_client5.similarity_search(query, k=2, filter=filter_query)
+    # Assuming openai_lc_client5 is defined and configured correctly
+    return openai_lc_client5.similarity_search(query,k=2, filter=filter_query)
 
-# Function to find a file by partial name
+
+import re
+import os
+
+name_file=""
 def find_file_by_partial_name(directory, partial_name):
     pattern = re.compile(rf".*__{partial_name}__.*")
     for root, dirs, files in os.walk(directory):
@@ -129,8 +133,7 @@ def find_file_by_partial_name(directory, partial_name):
             if pattern.match(file):
                 return os.path.join(root, file)
     return None
-name_file=""
-# Function to generate a response from the model
+
 def generate_response(query):
     global name_file  # Declare the global variable name_file
 
@@ -171,7 +174,13 @@ def generate_response(query):
         }
     )
     
+        
+
+    
     return response["text"], name_file
+
+
+
 
 # Extract unique metadata values for filters
 idents = list(set(idents))
@@ -179,25 +188,13 @@ names = list(set(names))
 years = list(set(years))
 languages = list(set(languages))
 
-# Set Streamlit sidebar configuration
-st.sidebar.title("Document Filters")
 
-# Filters
-selected_idents = st.sidebar.multiselect("Filter by Ident", idents)
-selected_names = st.sidebar.multiselect("Filter by Name", names)
-selected_years = st.sidebar.multiselect("Filter by Year", years)
-selected_languages = st.sidebar.multiselect("Filter by Language", languages)
+#os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"]
 
-# Display documents in sidebar
-st.sidebar.title("Documents")
-for name in names:
-    st.sidebar.write(f"{name}")
+#embeddings = OpenAIEmbeddings()
+#persist_directory = 'db'
+#openai_lc_client5 = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
 
-# Set a default model in session state
-if "mixtral_model" not in st.session_state:
-    st.session_state["mixtral_model"] = llm
-
-# Custom CSS for styling
 st.markdown(
     """
     <style>
@@ -206,6 +203,85 @@ st.markdown(
     }
     .css-1d391kg {
         color: green;
+    }
+    
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.sidebar.title("Document Filters")
+
+# Filters
+selected_idents = st.sidebar.multiselect("Filter by Ident", idents)
+selected_names = st.sidebar.multiselect("Filter by Name", names)
+selected_years = st.sidebar.multiselect("Filter by Year", years)
+selected_languages = st.sidebar.multiselect("Filter by Language", languages)
+
+# Filter documents based on selections
+
+st.sidebar.title("Documents")
+# Iterate over the unique names and write them to the sidebar
+for name in names:
+    st.sidebar.write(f"{name}")
+
+
+
+###load model
+#llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1",deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
+#llm.model_kwargs = {
+#    "temperature": 0.4,
+#    "repetition_penalty": 1.2,
+#    "max_new_tokens": 500,
+#    "top_p": 0.90,
+#}
+
+# Set a default model
+if "mixtral_model" not in st.session_state:
+    st.session_state["mixtral_model"] = llm
+
+
+st.markdown(
+    """
+    <style>
+    .vse-ai {
+        color: #00957d;
+        font-size: 2.5em; /* Adjusted font size */
+        margin-top: -2.5em; /* Negative margin to move it higher */
+        margin-bottom: 0.2em; /* Reduced margin */
+    }
+    .study-buddy {
+        color: black;
+        font-size: 2em; /* Adjusted font size */
+        margin-top: -2em; /* Negative margin to move it higher */
+        margin-bottom: 0.2em; /* Reduced margin */
+    }
+    .right-align {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .preview-header {
+        margin-top: -1.6em; /* Negative margin to move it higher */
+    }
+    .logo {
+        margin-top: -3em; /* Negative margin to move it higher */
+    }
+    .chat-container {
+        height: 650px;
+        overflow-y: auto;
+        border: 1px solid #ccc; /* Optional: Add a border for better visualization */
+        padding: 10px; /* Optional: Add padding for better visualization */
+    }
+    .resizable {
+        display: flex;
+        overflow: hidden;
+    }
+    .resizable > div {
+        resize: horizontal;
+        overflow: auto;
+        border: 1px solid #ccc; /* Optional: for better visualization */
+        padding: 10px;
+        flex: 1 1 auto;
     }
     </style>
     """,
@@ -228,18 +304,14 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-# Create columns for chat and document preview
 col1, col2 = st.columns([3, 2], gap="small")
 
 with col2:
-    # Display logo and document preview header
     st.markdown("<img class='logo' src='https://fis.vse.cz/wp-content/uploads/FIS_loga_FIS_CZ_2_FIS_CZ_kruhove_RGB_pro_obrazovku_FIS_2_logo_2_rgb_1772x1772_acf_cropped.jpg' width='150' style='float:right;'>", unsafe_allow_html=True)
     st.markdown("<h1 class='preview-header' style='text-align: center;'>Preview of the document</h1>", unsafe_allow_html=True)
     pdf_container = st.container(height=650, border=True)
 
 with col1:
-    # Display chat interface header
     st.markdown("<h1 class='vse-ai'>VŠE AI</h1>", unsafe_allow_html=True)
     st.markdown("<h2 class='study-buddy'>STUDY BUDDY</h2>", unsafe_allow_html=True)
     st.markdown("<h1 style='text-align: left;'>Chat with the AI</h1>", unsafe_allow_html=True)
@@ -247,10 +319,8 @@ with col1:
     # Container for the chat messages
     chat_container = st.container(height=650, border=True)
     with chat_container:
-        # Initialize chat history if not already done
         if "messages" not in st.session_state:
             st.session_state.messages = []
-        # Display chat messages from the session state
         for message in st.session_state.messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
@@ -272,10 +342,11 @@ with col1:
             with st.chat_message("assistant"):
                 st.markdown(response)
 
-# Display the selected document in PDF viewer if available
+
 if name_file:
-    with open(name_file, "rb") as pdf_file:
-        PDFbyte = pdf_file.read()
-        with col2:
-            with pdf_container:
-                pdf_viewer(PDFbyte)
+        with open(name_file, "rb") as pdf_file:
+            PDFbyte = pdf_file.read()
+            with col2:
+                # Zobrazení PDF v kontejneru
+                with pdf_container:
+                    pdf_viewer(PDFbyte)
