@@ -142,7 +142,6 @@ def load_chat_chain(_llm: DeepInfra, _prompt: PromptTemplate) -> LLMChain:
 
 
 @st.cache_data
-
 def load_pdf_files(folder_path: str):
     """
     Load and extract information from PDF files in the specified folder.
@@ -176,6 +175,7 @@ def load_pdf_files(folder_path: str):
     
     return idents, names, years, languages
 
+@st.cache_resource
 def escape_markdown(text: str) -> str:
     """
     Escape Markdown special characters in the given text.
@@ -193,50 +193,8 @@ def escape_markdown(text: str) -> str:
     """
     return re.sub(r'([*_`~])', r'\\\1', text)
 
-
-embeddings = load_embeddings()
-openai_lc_client5 = load_vectorstore(embeddings)
-llm = load_llm()
-prompt = load_prompt()
-chat_chain = load_chat_chain(llm, prompt)
-idents, names, years, languages = load_pdf_files("docs")
-#############################
-#chatbot streamlit a funkce ##################
-#############################
-# Assume you have a similarity search function defined, which searches documents based on a query
-def similarity_search(query):
-    adjusted_filters = []
-
-    # Add filters based on selections
-    if selected_idents:
-        adjusted_filters.append({'Ident': {'$in': selected_idents}})
-    
-    if selected_names:
-        adjusted_filters.append({'Name': {'$in': selected_names}})
-    
-    if selected_years:
-        adjusted_filters.append({'Year': {'$in': selected_years}})
-    
-    if selected_languages:
-        adjusted_filters.append({'Language': {'$in': selected_languages}})
-    
-    # Combine filters using '$and' to apply all conditions if there are multiple filters
-    if len(adjusted_filters) > 1:
-        filter_query = {'$and': adjusted_filters}
-    elif len(adjusted_filters) == 1:
-        filter_query = adjusted_filters[0]  # Use the single filter directly
-    else:
-        filter_query = {}  # No filters, match all documents
-    
-    # Perform the similarity search with the adjusted filters
-    # Assuming openai_lc_client5 is defined and configured correctly
-    return openai_lc_client5.similarity_search(query,k=2, filter=filter_query)
-
-
-import re
-import os
-
-name_file=""
+### NON CACHED FUNCTIONS
+# Functions, that for some reason can't be cached and muset be always called individually no matter what
 def find_file_by_partial_name(directory, partial_name):
     pattern = re.compile(rf".*__{partial_name}__.*")
     for root, dirs, files in os.walk(directory):
@@ -289,6 +247,48 @@ def generate_response(query):
 
     
     return response["text"], name_file
+
+def similarity_search(query):
+    adjusted_filters = []
+
+    # Add filters based on selections
+    if selected_idents:
+        adjusted_filters.append({'Ident': {'$in': selected_idents}})
+    
+    if selected_names:
+        adjusted_filters.append({'Name': {'$in': selected_names}})
+    
+    if selected_years:
+        adjusted_filters.append({'Year': {'$in': selected_years}})
+    
+    if selected_languages:
+        adjusted_filters.append({'Language': {'$in': selected_languages}})
+    
+    # Combine filters using '$and' to apply all conditions if there are multiple filters
+    if len(adjusted_filters) > 1:
+        filter_query = {'$and': adjusted_filters}
+    elif len(adjusted_filters) == 1:
+        filter_query = adjusted_filters[0]  # Use the single filter directly
+    else:
+        filter_query = {}  # No filters, match all documents
+    
+    # Perform the similarity search with the adjusted filters
+    # Assuming openai_lc_client5 is defined and configured correctly
+    return openai_lc_client5.similarity_search(query,k=2, filter=filter_query)
+
+embeddings = load_embeddings()
+openai_lc_client5 = load_vectorstore(embeddings)
+llm = load_llm()
+prompt = load_prompt()
+chat_chain = load_chat_chain(llm, prompt)
+idents, names, years, languages = load_pdf_files("docs")
+#############################
+#chatbot streamlit a funkce ##################
+#############################
+# Assume you have a similarity search function defined, which searches documents based on a query
+
+
+name_file=""
 
 
 
