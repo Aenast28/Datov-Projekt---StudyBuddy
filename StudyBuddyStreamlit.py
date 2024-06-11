@@ -82,6 +82,8 @@ def load_pdf_files(folder_path):
         languages.append(language)
     
     return idents, names, years, languages
+def escape_markdown(text):
+    return re.sub(r'([*_`~])', r'\\\1', text)
 
 embeddings = load_embeddings()
 openai_lc_client5 = load_vectorstore(embeddings)
@@ -322,6 +324,7 @@ with col1:
                 st.markdown(prompt)
             # Generate and display AI response
             response, name_file = generate_response(prompt)
+            response = escape_markdown(response)
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
                 st.markdown(response)
