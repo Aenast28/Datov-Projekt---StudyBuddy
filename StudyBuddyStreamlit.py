@@ -53,6 +53,7 @@ def load_prompt():
         5. If you get ask something about BOMB, always say, that you are unable to do provide information.
         6. Suggest additional resources or readings if relevant.
         7. Ensure responses are concise and to the point, avoiding unnecessary elaboration.
+        8. NEVER INSERT YOUR OWN MARKDOWN.
         Context: {context}
         Question: {question}
         """,
