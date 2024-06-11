@@ -221,7 +221,7 @@ def find_file_by_partial_name(directory: str, partial_name: str):
                 return os.path.join(root, file)
     return None
 
-def generate_response(query: str) -> Tuple[str, str]:
+def generate_response(query: str):
     """
     Generate a response based on the provided query.
 
@@ -279,6 +279,24 @@ def generate_response(query: str) -> Tuple[str, str]:
     return response["text"], name_file
 
 def similarity_search(query):
+        """
+    Perform a similarity search based on the provided query and selected filters.
+
+    This function constructs filters based on selected identifiers, names, years, and languages,
+    and applies them to the similarity search. The constructed filter query is then used to filter
+    the search results. If no filters are selected, the function matches all documents.
+
+    Args:
+        query (str): The query string to perform the similarity search.
+        selected_idents (List[str]): List of selected identifiers to filter the search.
+        selected_names (List[str]): List of selected names to filter the search.
+        selected_years (List[str]): List of selected years to filter the search.
+        selected_languages (List[str]): List of selected languages to filter the search.
+
+    Returns:
+        List[Dict[str, Any]]: A list of dictionaries representing the search results, each containing
+        information about the similarity score and other relevant details.
+    """
     adjusted_filters = []
 
     # Add filters based on selections
@@ -301,35 +319,25 @@ def similarity_search(query):
         filter_query = adjusted_filters[0]  # Use the single filter directly
     else:
         filter_query = {}  # No filters, match all documents
-    
-    # Perform the similarity search with the adjusted filters
-    # Assuming openai_lc_client5 is defined and configured correctly
+
     return openai_lc_client5.similarity_search(query,k=2, filter=filter_query)
 
+### ALL IMPORTANT VARIABLES
+#  
 embeddings = load_embeddings()
 openai_lc_client5 = load_vectorstore(embeddings)
 llm = load_llm()
 prompt = load_prompt()
 chat_chain = load_chat_chain(llm, prompt)
 idents, names, years, languages = load_pdf_files("docs")
-#############################
-#chatbot streamlit a funkce ##################
-#############################
-# Assume you have a similarity search function defined, which searches documents based on a query
-
-
 name_file=""
-
-
-
-
-# Extract unique metadata values for filters
 idents = list(set(idents))
 names = list(set(names))
 years = list(set(years))
 languages = list(set(languages))
 
-
+### STREAMLIT
+# 
 st.markdown(
     """
     <style>
