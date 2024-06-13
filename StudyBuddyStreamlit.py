@@ -319,8 +319,12 @@ def similarity_search(query):
         filter_query = adjusted_filters[0]  # Use the single filter directly
     else:
         filter_query = {}  # No filters, match all documents
-
+    
+    # Perform the similarity search with the adjusted filters
+    # Assuming openai_lc_client5 is defined and configured correctly
     return openai_lc_client5.similarity_search(query,k=2, filter=filter_query)
+
+
 
 ### ALL IMPORTANT VARIABLES
 #  
