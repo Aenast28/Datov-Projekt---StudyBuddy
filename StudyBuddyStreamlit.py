@@ -277,9 +277,8 @@ def generate_response(query: str):
     )
     
     return response["text"], name_file
-
 def similarity_search(query):
-        """
+    """
     Perform a similarity search based on the provided query and selected filters.
 
     This function constructs filters based on selected identifiers, names, years, and languages,
@@ -288,10 +287,10 @@ def similarity_search(query):
 
     Args:
         query (str): The query string to perform the similarity search.
-        selected_idents (List[str]): List of selected identifiers to filter the search.
-        selected_names (List[str]): List of selected names to filter the search.
-        selected_years (List[str]): List of selected years to filter the search.
-        selected_languages (List[str]): List of selected languages to filter the search.
+        selected_idents (List[str], optional): List of selected identifiers to filter the search.
+        selected_names (List[str], optional): List of selected names to filter the search.
+        selected_years (List[str], optional): List of selected years to filter the search.
+        selected_languages (List[str], optional): List of selected languages to filter the search.
 
     Returns:
         List[Dict[str, Any]]: A list of dictionaries representing the search results, each containing
@@ -322,7 +321,7 @@ def similarity_search(query):
     
     # Perform the similarity search with the adjusted filters
     # Assuming openai_lc_client5 is defined and configured correctly
-    return openai_lc_client5.similarity_search(query,k=2, filter=filter_query)
+    return openai_lc_client5.similarity_search(query, k=2, filter=filter_query)
 
 
 
