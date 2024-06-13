@@ -193,7 +193,7 @@ def escape_markdown(text: str) -> str:
     Returns:
         str: The text with Markdown special characters escaped.
     """
-    return re.sub(r'([*_`~])', r'\\\1', text)
+    return re.sub(r'([#*_`~])', r'\\\1', text)
 
 ### NON CACHED FUNCTIONS
 # Functions, that for some reason can't be cached and muset be always called individually no matter what
