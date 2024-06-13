@@ -478,7 +478,7 @@ with col1:
             response = escape_markdown(response)
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
-                st.markdown(response)
+                st.markdown(response, unsafe_allow_html=True)
 
 
 if name_file:
