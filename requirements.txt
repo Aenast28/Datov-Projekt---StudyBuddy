@@ -8,4 +8,4 @@ PyPDF2
 langchain-community
 langchain_openai
 unstructured[all-docs]
-tenacity
+tenacity==8.3.0
