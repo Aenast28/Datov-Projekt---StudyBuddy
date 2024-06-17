@@ -1,17 +1,19 @@
-__import__('pysqlite3')
-import sys
-import json
-import streamlit as st
+____('pysqlite3')
+ sys
+import asyncio
+from tenacity import AsyncRetrying
+ json
+ streamlit as st
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-import streamlit as st
-from langchain.vectorstores import Chroma
-from langchain.chains import LLMChain
-from langchain.prompts.prompt import PromptTemplate
-from langchain_community.llms import DeepInfra
-import os
-from langchain_openai import OpenAIEmbeddings
-import re
-from streamlit_pdf_viewer import pdf_viewer
+ streamlit as st
+from langchain.vectorstores  Chroma
+from langchain.chains  LLMChain
+from langchain.prompts.prompt  PromptTemplate
+from langchain_community.llms  DeepInfra
+ os
+from langchain_openai  OpenAIEmbeddings
+ re
+from streamlit_pdf_viewer  pdf_viewer
 
 # Configure Streamlit page
 st.set_page_config(
@@ -122,8 +124,8 @@ def similarity_search(query):
     return openai_lc_client5.similarity_search(query,k=2, filter=filter_query)
 
 
-import re
-import os
+ re
+ os
 
 name_file=""
 def find_file_by_partial_name(directory, partial_name):
