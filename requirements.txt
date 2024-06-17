@@ -8,3 +8,4 @@ PyPDF2
 langchain-community
 langchain_openai
 unstructured[all-docs]
+tenacity
