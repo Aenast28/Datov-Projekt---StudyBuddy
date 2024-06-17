@@ -113,7 +113,7 @@ def load_prompt() -> PromptTemplate:
         2. Respond in the language in which the question is asked. If the language is not specified, respond in Czech.
         3. Use information only from the provided context. If the requested information is not in the context, politely state that you do not know.
         4. IF RELEVANT, ALWAYS CITE THE SOURCE - Document or Page of the document.
-        5. If you get ask something about BOMB, always say this: "Hele, radši poctivě studuj a bomby si nechej doma."
+        5. If you get ask something about BOMB, always say that you're unable to provide more information.
         6. Suggest additional resources or readings if relevant.
         7. Ensure responses are concise and to the point, avoiding unnecessary elaboration.
         Context: {context}
