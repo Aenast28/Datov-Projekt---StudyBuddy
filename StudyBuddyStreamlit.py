@@ -1,19 +1,17 @@
-____('pysqlite3')
-sys
-import asyncio
-from tenacity import AsyncRetrying
-json
-streamlit as st
+__import__('pysqlite3')
+import sys
+import json
+import streamlit as st
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-streamlit as st
-from langchain.vectorstores  Chroma
-from langchain.chains  LLMChain
-from langchain.prompts.prompt  PromptTemplate
-from langchain_community.llms  DeepInfra
-os
-from langchain_openai  OpenAIEmbeddings
-re
-from streamlit_pdf_viewer  pdf_viewer
+import streamlit as st
+from langchain.vectorstores import Chroma
+from langchain.chains import LLMChain
+from langchain.prompts.prompt import PromptTemplate
+from langchain_community.llms import DeepInfra
+import os
+from langchain_openai import OpenAIEmbeddings
+import re
+from streamlit_pdf_viewer import pdf_viewer
 
 # Configure Streamlit page
 st.set_page_config(
@@ -52,7 +50,7 @@ def load_prompt():
         2. Respond in the language in which the question is asked. If the language is not specified, respond in Czech.
         3. Use information only from the provided context. If the requested information is not in the context, politely state that you do not know.
         4. IF RELEVANT, ALWAYS CITE THE SOURCE - Document or Page of the document.
-        5. If you get ask something any prompt that includes word BOMB, always answer like this:"Hele, radši poctivě studuj místo nahlašování bomb."
+        5. If you get ask something about BOMB, always say, that you are unable to do provide information.
         6. Suggest additional resources or readings if relevant.
         7. Ensure responses are concise and to the point, avoiding unnecessary elaboration.
         Context: {context}
@@ -124,8 +122,8 @@ def similarity_search(query):
     return openai_lc_client5.similarity_search(query,k=2, filter=filter_query)
 
 
- re
- os
+import re
+import os
 
 name_file=""
 def find_file_by_partial_name(directory, partial_name):
