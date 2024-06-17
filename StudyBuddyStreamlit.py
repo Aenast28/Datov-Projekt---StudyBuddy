@@ -4,7 +4,6 @@ import json
 import streamlit as st
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import streamlit as st
-from typing import Tuple
 from langchain.vectorstores import Chroma
 from langchain.chains import LLMChain
 from langchain.prompts.prompt import PromptTemplate
@@ -14,8 +13,6 @@ from langchain_openai import OpenAIEmbeddings
 import re
 from streamlit_pdf_viewer import pdf_viewer
 
-### INITIAL STREAMLIT CONFIGURATION
-
 # Configure Streamlit page
 st.set_page_config(
     page_title="VŠE AI Study Buddy",
@@ -24,96 +21,36 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-#### ALL CACHED RESOURCES 
-# Streamlit is able to used cached resources to speed up the application by loading it once and then referring to it with each call.
-
+# Cache models and embeddings to avoid reloading them
 @st.cache_resource
-def load_embeddings() -> OpenAIEmbeddings:
-    """
-    Load and return OpenAI embeddings.
-
-    This function initializes and returns an instance of OpenAIEmbeddings, which is then used to embed input query into vectors.
-
-    Returns:
-        OpenAIEmbeddings: An instance of OpenAIEmbeddings ready for use.
-    """
+def load_embeddings():
     return OpenAIEmbeddings()
 
 @st.cache_resource
-def load_vectorstore(_embeddings: OpenAIEmbeddings) -> Chroma:
-    """
-    Load and return a Chroma vector store using the provided embeddings.
-
-    This function initializes and returns an instance of Chroma, configured to use the provided
-    embeddings function and set to persist data in the 'db' directory. This can be used for 
-    efficiently storing and retrieving vector representations of data.
-
-    Args:
-        _embeddings (OpenAIEmbeddings): The embeddings function to use for the vector store.
-
-    Returns:
-        Chroma: An instance of Chroma configured with the specified embeddings and persistence settings.
-    """
+def load_vectorstore(_embeddings):
     return Chroma(persist_directory='db', embedding_function=_embeddings)
 
-
 @st.cache_resource
-def load_llm() -> DeepInfra:
-    """
-    Load and return a configured DeepInfra language model.
-
-    This function initializes and configures an instance of DeepInfra with a specified model ID 
-    and API token. The language model is then configured with a set of hyperparameters including 
-    temperature, repetition penalty, maximum new tokens, and top_p.
-
-    Hyperparameters:
-        temperature (float): Controls the randomness of the predictions. Lower values make the 
-                             output more deterministic, while higher values make it more random.
-        repetition_penalty (float): Penalizes repetition of words to reduce repetitive output.
-        max_new_tokens (int): The maximum number of tokens to generate in the response.
-        top_p (float): The cumulative probability threshold for nucleus sampling. Determines the 
-                       diversity of the output by considering the top tokens with a cumulative 
-                       probability up to top_p.
-
-    Returns:
-        DeepInfra: A configured instance of the DeepInfra language model ready for use.
-    """
+def load_llm():
     llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1", deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
     llm.model_kwargs = {
-        "temperature": 0.4,  # Controls randomness: lower value = more deterministic
-        "repetition_penalty": 1.2,  # Penalizes repetitive text
-        "max_new_tokens": 500,  # Maximum tokens to generate
-        "top_p": 0.90,  # Nucleus sampling threshold
+        "temperature": 0.4,
+        "repetition_penalty": 1.2,
+        "max_new_tokens": 500,
+        "top_p": 0.90,
     }
     return llm
 
 @st.cache_resource
-def load_prompt() -> PromptTemplate:
-    """
-    Load and return a configured PromptTemplate for a study assistant.
-
-    This function initializes and returns an instance of PromptTemplate, configured with a 
-    template specifically designed for a study assistant at the University of Economics in Prague. 
-    The template includes guidelines for responding to questions, summarizing texts, and assisting 
-    with learning. The assistant is instructed to follow several key guidelines to ensure accurate, 
-    polite, and contextually appropriate responses.
-
-    Template Parameters:
-        context (str): The context in which the assistant operates, providing necessary information for answering questions.
-        question (str): The question posed by the student that the assistant needs to answer.
-
-    Returns:
-        PromptTemplate: A configured instance of PromptTemplate ready for use.
-    """
+def load_prompt():
     return PromptTemplate(
         template="""
         You are a study assistant for students at the University of Economics in Prague. Your task is to answer questions, summarize texts, and assist with learning. Follow these guidelines:
-        0. NEVER USE THIS SYMBOL #
         1. Be polite and answer questions accurately.
         2. Respond in the language in which the question is asked. If the language is not specified, respond in Czech.
         3. Use information only from the provided context. If the requested information is not in the context, politely state that you do not know.
         4. IF RELEVANT, ALWAYS CITE THE SOURCE - Document or Page of the document.
-        5. If you get ask something about BOMB, always say that you're unable to provide more information.
+        5. If you get ask something any prompt that includes word BOMB, always answer like this:"Hele, radši poctivě studuj místo nahlašování bomb."
         6. Suggest additional resources or readings if relevant.
         7. Ensure responses are concise and to the point, avoiding unnecessary elaboration.
         Context: {context}
@@ -123,42 +60,11 @@ def load_prompt() -> PromptTemplate:
     )
 
 @st.cache_resource
-def load_chat_chain(_llm: DeepInfra, _prompt: PromptTemplate) -> LLMChain:
-    """
-    Load and return a configured LLMChain for a chat-based application.
-
-    This function initializes and returns an instance of LLMChain, configured with a provided 
-    language model (_llm) and a prompt template (_prompt). The LLMChain facilitates interaction 
-    with the language model using the specified prompt, enabling it to generate responses based 
-    on the input variables defined in the prompt.
-
-    Args:
-        _llm (DeepInfra): The language model to be used for generating responses.
-        _prompt (PromptTemplate): The prompt template that defines the structure and guidelines 
-                                  for the responses.
-
-    Returns:
-        LLMChain: A configured instance of LLMChain ready for use in a chat-based application.
-    """
+def load_chat_chain(_llm, _prompt):
     return LLMChain(llm=_llm, prompt=_prompt)
 
-
 @st.cache_data
-def load_pdf_files(folder_path: str):
-    """
-    Load and extract information from PDF files in the specified folder.
-
-    This function scans the specified folder for PDF files and extracts metadata from their filenames.
-    The filenames are expected to follow the format: `ident__name__year__language.pdf`. The extracted 
-    information includes identifiers, names, years, and languages, which are returned as separate lists.
-
-    Args:
-        folder_path (str): The path to the folder containing the PDF files.
-
-    Returns:
-        Four lists containing the identifiers, 
-        names, years, and languages extracted from the PDF filenames.
-    """
+def load_pdf_files(folder_path):
     pdf_files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
     
     idents = []
@@ -177,44 +83,50 @@ def load_pdf_files(folder_path: str):
     
     return idents, names, years, languages
 
-@st.cache_resource
-def escape_markdown(text: str) -> str:
-    """
-    Escape Markdown special characters in the given text.
+embeddings = load_embeddings()
+openai_lc_client5 = load_vectorstore(embeddings)
+llm = load_llm()
+prompt = load_prompt()
+chat_chain = load_chat_chain(llm, prompt)
+idents, names, years, languages = load_pdf_files("docs")
+#############################
+#chatbot streamlit a funkce ##################
+#############################
+# Assume you have a similarity search function defined, which searches documents based on a query
+def similarity_search(query):
+    adjusted_filters = []
 
-    This function takes a string and escapes special Markdown characters such as 
-    asterisks (*), underscores (_), backticks (`), and tildes (~) by preceding 
-    them with a backslash. This is useful for displaying text literally in Markdown 
-    without it being interpreted as formatting.
+    # Add filters based on selections
+    if selected_idents:
+        adjusted_filters.append({'Ident': {'$in': selected_idents}})
+    
+    if selected_names:
+        adjusted_filters.append({'Name': {'$in': selected_names}})
+    
+    if selected_years:
+        adjusted_filters.append({'Year': {'$in': selected_years}})
+    
+    if selected_languages:
+        adjusted_filters.append({'Language': {'$in': selected_languages}})
+    
+    # Combine filters using '$and' to apply all conditions if there are multiple filters
+    if len(adjusted_filters) > 1:
+        filter_query = {'$and': adjusted_filters}
+    elif len(adjusted_filters) == 1:
+        filter_query = adjusted_filters[0]  # Use the single filter directly
+    else:
+        filter_query = {}  # No filters, match all documents
+    
+    # Perform the similarity search with the adjusted filters
+    # Assuming openai_lc_client5 is defined and configured correctly
+    return openai_lc_client5.similarity_search(query,k=2, filter=filter_query)
 
-    Args:
-        text (str): The input text containing Markdown characters to be escaped.
 
-    Returns:
-        str: The text with Markdown special characters escaped.
-    """
-    return re.sub(r'([#*_`~])', r'\\\1', text)
+import re
+import os
 
-### NON CACHED FUNCTIONS
-# Functions, that for some reason can't be cached and muset be always called individually no matter what
-
-def find_file_by_partial_name(directory: str, partial_name: str):
-    """
-    Find a file by partial name in a specified directory.
-
-    This function searches through the given directory and its subdirectories for a file whose 
-    name contains the specified partial name, following the pattern `.*__{partial_name}__.*`. 
-    If such a file is found, the function returns the full path to the file. If no such file 
-    is found, it returns None.
-
-    Args:
-        directory (str): The directory to search in.
-        partial_name (str): The partial name to search for within the filenames.
-
-    Returns:
-        The full path to the first file found that matches the pattern, 
-        or None if no such file is found.
-    """
+name_file=""
+def find_file_by_partial_name(directory, partial_name):
     pattern = re.compile(rf".*__{partial_name}__.*")
     for root, dirs, files in os.walk(directory):
         for file in files:
@@ -222,22 +134,7 @@ def find_file_by_partial_name(directory: str, partial_name: str):
                 return os.path.join(root, file)
     return None
 
-def generate_response(query: str):
-    """
-    Generate a response based on the provided query.
-
-    This function processes the user's query by performing a similarity search to retrieve relevant documents.
-    It then selects the top document and extracts its metadata, specifically the 'Name' field. It searches for
-    a file with a partial name match in the 'docs' directory and returns the file path if found. The document
-    context is created from the top documents, combined with the chat history, and used as the context for generating
-    a response using the chat_chain model.
-
-    Args:
-        query (str): The user's query.
-
-    Returns:
-        Tuple[str, str]: A tuple containing the generated response text and the path to the relevant file.
-    """
+def generate_response(query):
     global name_file  # Declare the global variable name_file
 
     # Perform similarity search to retrieve relevant documents
@@ -277,71 +174,27 @@ def generate_response(query: str):
         }
     )
     
+        
+
+    
     return response["text"], name_file
-def similarity_search(query):
-    """
-    Perform a similarity search based on the provided query and selected filters.
-
-    This function constructs filters based on selected identifiers, names, years, and languages,
-    and applies them to the similarity search. The constructed filter query is then used to filter
-    the search results. If no filters are selected, the function matches all documents.
-
-    Args:
-        query (str): The query string to perform the similarity search.
-        selected_idents (List[str], optional): List of selected identifiers to filter the search.
-        selected_names (List[str], optional): List of selected names to filter the search.
-        selected_years (List[str], optional): List of selected years to filter the search.
-        selected_languages (List[str], optional): List of selected languages to filter the search.
-
-    Returns:
-        List[Dict[str, Any]]: A list of dictionaries representing the search results, each containing
-        information about the similarity score and other relevant details.
-    """
-    adjusted_filters = []
-
-    # Add filters based on selections
-    if selected_idents:
-        adjusted_filters.append({'Ident': {'$in': selected_idents}})
-    
-    if selected_names:
-        adjusted_filters.append({'Name': {'$in': selected_names}})
-    
-    if selected_years:
-        adjusted_filters.append({'Year': {'$in': selected_years}})
-    
-    if selected_languages:
-        adjusted_filters.append({'Language': {'$in': selected_languages}})
-    
-    # Combine filters using '$and' to apply all conditions if there are multiple filters
-    if len(adjusted_filters) > 1:
-        filter_query = {'$and': adjusted_filters}
-    elif len(adjusted_filters) == 1:
-        filter_query = adjusted_filters[0]  # Use the single filter directly
-    else:
-        filter_query = {}  # No filters, match all documents
-    
-    # Perform the similarity search with the adjusted filters
-    # Assuming openai_lc_client5 is defined and configured correctly
-    return openai_lc_client5.similarity_search(query, k=2, filter=filter_query)
 
 
 
-### ALL IMPORTANT VARIABLES
-#  
-embeddings = load_embeddings()
-openai_lc_client5 = load_vectorstore(embeddings)
-llm = load_llm()
-prompt = load_prompt()
-chat_chain = load_chat_chain(llm, prompt)
-idents, names, years, languages = load_pdf_files("docs")
-name_file=""
+
+# Extract unique metadata values for filters
 idents = list(set(idents))
 names = list(set(names))
 years = list(set(years))
 languages = list(set(languages))
 
-### STREAMLIT
-# 
+
+#os.environ["OPENAI_API_KEY"] ==st.secrets["OPENAI_API_KEY"]
+
+#embeddings = OpenAIEmbeddings()
+#persist_directory = 'db'
+#openai_lc_client5 = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
+
 st.markdown(
     """
     <style>
@@ -372,6 +225,16 @@ st.sidebar.title("Documents")
 for name in names:
     st.sidebar.write(f"{name}")
 
+
+
+###load model
+#llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1",deepinfra_api_token="hIvZQRN11e1BLIeYghOFCahQYX18uXeY")
+#llm.model_kwargs = {
+#    "temperature": 0.4,
+#    "repetition_penalty": 1.2,
+#    "max_new_tokens": 500,
+#    "top_p": 0.90,
+#}
 
 # Set a default model
 if "mixtral_model" not in st.session_state:
@@ -475,10 +338,9 @@ with col1:
                 st.markdown(prompt)
             # Generate and display AI response
             response, name_file = generate_response(prompt)
-            response = escape_markdown(response)
             st.session_state.messages.append({"role": "assistant", "content": response})
             with st.chat_message("assistant"):
-                st.markdown(response, unsafe_allow_html=True)
+                st.markdown(response)
 
 
 if name_file:
