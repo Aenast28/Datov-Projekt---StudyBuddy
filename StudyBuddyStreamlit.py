@@ -32,7 +32,7 @@ def load_vectorstore(_embeddings):
 
 @st.cache_resource
 def load_llm():
-    llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1", deepinfra_api_token="")
+    llm = DeepInfra(model_id="mistralai/Mixtral-8x22B-Instruct-v0.1", deepinfra_api_token="rOZVhMIraycW4Hx51spjhe3xLiA4kmX9")
     llm.model_kwargs = {
         "temperature": 0.4,
         "repetition_penalty": 1.2,
