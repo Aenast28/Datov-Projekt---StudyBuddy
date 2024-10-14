@@ -1,9 +1,112 @@
-<mxfile host="app.diagrams.net" modified="2024-10-14T11:26:44.730Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.5.2" etag="mS-vs5_KBtjSdr8_J-ak" type="github">
+<mxfile host="app.diagrams.net" modified="2024-10-14T12:04:45.776Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" etag="S9yXcKAqeXX1brGTscav" version="24.5.2" type="github">
   <diagram name="Stránka-1" id="sfbK5C_OxcTGRKMmgGOR">
-    <mxGraphModel>
+    <mxGraphModel dx="1434" dy="772" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-34" value="Azure ML Services?" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;fillColor=#ffffff;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;swimlaneFillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="400" y="602.5" width="150" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-30" value="Teams" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;fillColor=#ffffff;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;swimlaneFillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="570" y="540" width="140" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-23" value="Cosmos DB? (ale nemusí být, je to jen doporučená extension)" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;fillColor=#ffffff;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;swimlaneFillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="50" y="630" width="340" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-22" value="Storage Accounts?" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;fillColor=#ffffff;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;swimlaneFillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="310" y="300" width="210" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-21" value="Data Factories?" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;fillColor=#ffffff;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;swimlaneFillColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="150" y="300" width="140" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BPo5eXHVbgucttfhQ8fW-1" target="BPo5eXHVbgucttfhQ8fW-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-1" value="Moodle VŠE" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="10" y="330" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BPo5eXHVbgucttfhQ8fW-2" target="BPo5eXHVbgucttfhQ8fW-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-2" value="Stage databáze" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="320" width="70" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BPo5eXHVbgucttfhQ8fW-3" target="BPo5eXHVbgucttfhQ8fW-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-3" value="ETL pipeline&lt;br&gt;(diplomka už je?)" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="170" y="345" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="BPo5eXHVbgucttfhQ8fW-7" target="BPo5eXHVbgucttfhQ8fW-11">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="420" y="455" />
+              <mxPoint x="420" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-7" value="preprocessing pipeline" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="170" y="430" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BPo5eXHVbgucttfhQ8fW-11" target="BPo5eXHVbgucttfhQ8fW-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="465" y="500" />
+              <mxPoint x="220" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-11" value="Chunk databáze" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="320" width="70" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BPo5eXHVbgucttfhQ8fW-14" target="BPo5eXHVbgucttfhQ8fW-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-14" value="vektorizace" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="170" y="510" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BPo5eXHVbgucttfhQ8fW-15" target="BPo5eXHVbgucttfhQ8fW-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-15" value="Vector store" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="185" y="660" width="70" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="BPo5eXHVbgucttfhQ8fW-24" target="BPo5eXHVbgucttfhQ8fW-27">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="470" y="765" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-24" value="RAG" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="420" y="685" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="BPo5eXHVbgucttfhQ8fW-26" target="BPo5eXHVbgucttfhQ8fW-24">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="640" y="650" />
+              <mxPoint x="470" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-26" value="User Input" style="html=1;dashed=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="590" y="590" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-27" value="User Output" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="590" y="740" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BPo5eXHVbgucttfhQ8fW-32">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="850" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BPo5eXHVbgucttfhQ8fW-32" value="Tady je ještě&lt;div&gt;potřeba udělat&lt;/div&gt;&lt;div&gt;rozlišení agentů?&lt;/div&gt;" style="shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="890" width="120" height="120" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
